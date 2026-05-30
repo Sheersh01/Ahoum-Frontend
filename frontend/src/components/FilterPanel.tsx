@@ -35,7 +35,7 @@ const FilterPanel = ({
           <div style={{ width: 24 }} />
         </div>
 
-        <div className="mt-2 rounded-[12px] bg-[#f7f7f7] p-4">
+        <div className="mt-2 rounded-xl bg-[#f7f7f7] p-4">
           <h3 className="text-[14px] font-semibold">Categories</h3>
           <div className="mt-3 space-y-3">
             {["Eggs", "Noodles & Pasta", "Chips & Crisps", "Fast Food"].map(

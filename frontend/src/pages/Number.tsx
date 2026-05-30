@@ -24,32 +24,30 @@ const Number = () => {
   };
 
   return (
-    <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
+    <main className="w-full bg-white font-sans text-[#181725]">
       <form
         noValidate
         onSubmit={handleSubmit}
-        className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_42%,#fdebea_100%)]"
+        className="relative mx-auto min-h-screen w-full  overflow-hidden"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_62%_7%,rgba(226,251,243,0.86)_0%,rgba(255,255,255,0)_31%),radial-gradient(circle_at_22%_91%,rgba(246,241,255,0.72)_0%,rgba(255,255,255,0)_35%)]" />
-
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate("/signin")}
-          className="relative ml-[19px] mt-[10px] flex h-[14px] w-[14px] items-center justify-center"
+          className="relative ml-[19px] pt-8 mt-[10px] flex h-[14px] w-[14px] items-center justify-center"
         >
-          <img src={BackArrow} alt="" className="h-[10px] w-[6px]" />
+          <img src={BackArrow} alt="" className="w-[10px]" />
         </button>
 
         <div className="relative px-[20px] pt-[38px]">
-          <h1 className="text-[18px] leading-[22px] font-semibold tracking-normal">
+          <h1 className="text-[20px] leading-[22px] font-semibold tracking-normal">
             Enter your mobile number
           </h1>
 
           <div className="mt-[21px]">
             <label
               htmlFor="mobile-number"
-              className="block text-[10px] leading-[12px] font-medium text-[#7c7c7c]"
+              className="block text-[12px] leading-[12px] font-medium text-[#7c7c7c]"
             >
               Mobile Number
             </label>
@@ -57,7 +55,7 @@ const Number = () => {
               <img
                 src={FlagIcon}
                 alt="Bangladesh"
-                className="h-[14px] w-[25px] shrink-0"
+                className="h-[20px] w-[25px] shrink-0"
               />
               <input
                 id="mobile-number"

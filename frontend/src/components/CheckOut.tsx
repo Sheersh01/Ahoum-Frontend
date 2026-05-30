@@ -26,7 +26,7 @@ const CheckOut = ({
 
   if (!visible && !entered) return null;
 
-  const panelClass = `relative z-[101] mx-auto w-full max-w-[430px] bg-white p-6 shadow-lg transition-transform duration-300 mb-0 ${entered ? "translate-y-0" : "translate-y-full"}`;
+  const panelClass = `relative z-[101] mx-auto w-full  bg-white p-6 shadow-lg transition-transform duration-300 mb-0 ${entered ? "translate-y-0" : "translate-y-full"}`;
 
   const closeWithAnimation = () => {
     setEntered(false);

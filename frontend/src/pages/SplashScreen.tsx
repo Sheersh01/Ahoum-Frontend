@@ -14,7 +14,7 @@ const SplashScreen = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-500">
+    <div className="min-h-screen flex items-center justify-center  bg-[#53B175]">
       <img src={logo} alt="Nectar Logo" />
     </div>
   );

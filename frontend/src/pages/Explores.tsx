@@ -50,7 +50,7 @@ const categories = [
 const Explores = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto w-full max-w-[430px] pb-[28px]">
+      <section className="mx-auto w-full  pb-[100px]">
         <header className="pt-[20px] text-center">
           <h1 className="text-[20px] leading-[24px] font-semibold">
             Find Products
@@ -73,7 +73,7 @@ const Explores = () => {
                 <Link
                   key={cat.name}
                   to={`/products/${slug}`}
-                  className={`flex h-[140px] flex-col items-center justify-center gap-[8px] rounded-[12px] border px-[12px] py-[14px] ${cat.bg} ${cat.border}`}
+                  className={`flex h-[140px] flex-col items-center justify-center gap-[8px] rounded-xl border px-[12px] py-[14px] ${cat.bg} ${cat.border}`}
                   aria-label={cat.name}
                 >
                   <div className="flex h-[68px] w-[68px] items-center justify-center">

@@ -35,8 +35,8 @@ const navItems = [
 
 const StickyFooter = () => {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 mx-auto h-[94px] w-full max-w-[430px] rounded-t-[16px] border border-[#f0f0f0] bg-white shadow-[0_-4px_18px_rgba(0,0,0,0.08)]">
-      <div className="flex h-full items-start justify-between px-[26px] pt-[27px]">
+    <nav className="fixed inset-x-0 bottom-0 z-50 mx-auto block lg:hidden h-[80px] w-full rounded-t-[16px] border border-[#f0f0f0] bg-white shadow-[0_-4px_18px_rgba(0,0,0,0.08)]">
+      <div className="flex h-full items-start justify-around px-[26px] pt-[15px]">
         {navItems.map((item) => (
           <NavLink
             key={item.label}

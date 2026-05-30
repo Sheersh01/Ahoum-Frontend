@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import AppleImage from "../assets/apple.png";
 import BackArrow from "../assets/back arrow.png";
 import DropDownArrow from "../assets/DropDownArrow.png";
@@ -9,11 +9,24 @@ import MinusIcon from "../assets/Minus.png";
 import PlusIcon from "../assets/Plus.png";
 import RatingImage from "../assets/rating.png";
 import ShareIcon from "../assets/share.png";
+import { useCartStore } from "../store/cartStore";
+import { useFavoritesStore } from "../store/favoritesStore";
+
+type ProductDetailState = {
+  image?: string;
+  name?: string;
+  meta?: string;
+  price?: string;
+};
 
 const ProductDetail = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const productState = location.state as ProductDetailState | null;
+  const addItem = useCartStore((state) => state.addItem);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+  const isFavorite = useFavoritesStore((state) => state.isFavorite);
   const [quantity, setQuantity] = useState(1);
-  const [isLiked, setIsLiked] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(true);
 
   const decreaseQuantity = () => {
@@ -24,33 +37,50 @@ const ProductDetail = () => {
     setQuantity((currentQuantity) => currentQuantity + 1);
   };
 
+  const productImage = productState?.image ?? AppleImage;
+  const productName = productState?.name ?? "Naturel Red Apple";
+  const productMeta = productState?.meta ?? "1kg, Price";
+  const productPrice = productState?.price ?? "$4.99";
+  const favoriteItem = {
+    id: productName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    name: productName,
+    meta: productMeta,
+    price: productPrice,
+    image: productImage,
+  };
+  const liked = isFavorite(favoriteItem.id);
+
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-white">
-        <div className="relative h-[162px] rounded-b-[22px] bg-[#f2f3f2]">
-          <button
-            type="button"
-            aria-label="Go back"
-            onClick={() => navigate(-1)}
-            className="absolute left-[17px] top-[13px] flex h-[16px] w-[16px] items-center justify-center"
-          >
-            <img src={BackArrow} alt="" className="h-[10px] w-[6px]" />
-          </button>
+      <section className="relative mx-auto min-h-screen w-full  overflow-hidden bg-white">
+        <div className="relative h-[40vh] rounded-b-[22px] bg-[#f2f3f2] overflow-hidden">
+          <div className="flex w-full items-center justify-between px-4 pt-4">
+            <button
+              type="button"
+              aria-label="Go back"
+              onClick={() => navigate(-1)}
+              className=" flex h-[16px] w-[16px] items-center justify-center"
+            >
+              <img src={BackArrow} alt="" className="w-[10px]" />
+            </button>
 
-          <button
-            type="button"
-            aria-label="Share product"
-            className="absolute right-[17px] top-[10px] flex h-[18px] w-[18px] items-center justify-center"
-          >
-            <img src={ShareIcon} alt="" className="h-[14px] w-[14px]" />
-          </button>
-
-          <img
-            src={AppleImage}
-            alt="Natural red apple"
-            className="absolute left-1/2 top-[31px] h-auto w-[173px] -translate-x-1/2 select-none"
-            draggable={false}
-          />
+            <button
+              type="button"
+              aria-label="Share product"
+              className=" flex h-[18px] w-[18px] items-center justify-center"
+            >
+              <img src={ShareIcon} alt="" className="w-[24px]" />
+            </button>
+          </div>
+          <div className="w-full">
+            <img
+              src={productImage}
+              alt={productName}
+              // className="absolute left-1/2 top-[31px] h-auto w-[173px] -translate-x-1/2 select-none"
+              className="w-full h-full object-contain select-none"
+              draggable={false}
+            />
+          </div>
 
           <div className="absolute bottom-[11px] left-1/2 flex -translate-x-1/2 items-center gap-[3px]">
             <span className="h-[2px] w-[8px] rounded-full bg-[#53b175]" />
@@ -63,24 +93,24 @@ const ProductDetail = () => {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h1 className="text-[14px] leading-[17px] font-semibold">
-                Naturel Red Apple
+                {productName}
               </h1>
               <p className="mt-[2px] text-[9px] leading-[11px] font-medium text-[#7c7c7c]">
-                1kg, Price
+                {productMeta}
               </p>
             </div>
 
             <button
               type="button"
               aria-label="Add to favorites"
-              aria-pressed={isLiked}
-              onClick={() => setIsLiked((value) => !value)}
+              aria-pressed={liked}
+              onClick={() => toggleFavorite(favoriteItem)}
               className="mt-[3px] flex h-[19px] w-[19px] items-center justify-center"
             >
               <img
                 src={LikeIcon}
                 alt=""
-                className={`h-[15px] w-[16px] ${isLiked ? "opacity-100" : "opacity-75"}`}
+                className={`h-[15px] w-[16px] ${liked ? "opacity-100" : "opacity-75"}`}
               />
             </button>
           </div>
@@ -110,7 +140,7 @@ const ProductDetail = () => {
               </button>
             </div>
 
-            <p className="text-[14px] leading-none font-bold">$4.99</p>
+            <p className="text-[14px] leading-none font-bold">{productPrice}</p>
           </div>
 
           <div className="mt-[17px] h-px w-full bg-[#e2e2e2]" />
@@ -184,6 +214,18 @@ const ProductDetail = () => {
 
           <button
             type="button"
+            onClick={() =>
+              addItem(
+                {
+                  id: productName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+                  name: productName,
+                  meta: productMeta,
+                  price: Number(productPrice.replace(/[^0-9.]/g, "")),
+                  image: productImage,
+                },
+                quantity,
+              )
+            }
             className="mt-[7px] flex h-[40px] w-full items-center justify-center rounded-[10px] bg-[#53b175] text-[11px] leading-none font-semibold text-white"
           >
             Add To Basket

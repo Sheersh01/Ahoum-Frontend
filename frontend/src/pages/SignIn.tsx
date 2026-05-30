@@ -9,7 +9,7 @@ const SignIn = () => {
 
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-white">
+      <section className="relative mx-auto min-h-screen w-full  overflow-hidden bg-white">
         <img
           src={SignInHero}
           alt="Fresh groceries"
@@ -34,7 +34,7 @@ const SignIn = () => {
           <button
             type="button"
             onClick={() => navigate("/number")}
-            className="mt-[23px] flex h-[48px] w-full items-center justify-center rounded-[12px] bg-[#53b175] text-[13px] leading-none font-semibold text-white"
+            className="mt-[23px] flex h-[48px] w-full items-center justify-center rounded-xl bg-[#53b175] text-[13px] leading-none font-semibold text-white"
           >
             Continue
           </button>
@@ -47,7 +47,7 @@ const SignIn = () => {
             <button
               type="button"
               onClick={() => navigate("/login")}
-              className="relative flex h-[48px] w-full items-center justify-center rounded-[12px] bg-[#5383ec] text-[13px] leading-none font-semibold text-white"
+              className="relative flex h-[48px] w-full items-center justify-center rounded-xl bg-[#5383ec] text-[13px] leading-none font-semibold text-white"
             >
               <img
                 src={GoogleIcon}
@@ -60,7 +60,7 @@ const SignIn = () => {
             <button
               type="button"
               onClick={() => navigate("/login")}
-              className="relative flex h-[48px] w-full items-center justify-center rounded-[12px] bg-[#4a66ac] text-[13px] leading-none font-semibold text-white"
+              className="relative flex h-[48px] w-full items-center justify-center rounded-xl bg-[#4a66ac] text-[13px] leading-none font-semibold text-white"
             >
               <img
                 src={FacebookIcon}

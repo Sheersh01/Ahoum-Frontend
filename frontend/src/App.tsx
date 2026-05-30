@@ -16,11 +16,23 @@ import MyCart from "./pages/MyCart";
 import OrderAccepted from "./pages/OrderAccepted";
 import Account from "./pages/Account";
 import TrackOrder from "./pages/TrackOrder";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="w-full min-h-screen">
+      <div className="max-w-7xl mx-auto min-h-screen">
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="colored"
+        />
         <Routes>
           <Route path="/" element={<SplashScreen />} />
           <Route path="/onboarding" element={<Onboarding />} />

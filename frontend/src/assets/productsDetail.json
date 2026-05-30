@@ -1,0 +1,109 @@
+{
+  "categories": [
+    {
+      "id": "beverages",
+      "name": "Beverages",
+      "image": "beverages/Beverages.png"
+    },
+    {
+      "id": "bakery",
+      "name": "Bakery",
+      "image": "categories/bakery.png"
+    },
+    {
+      "id": "vegetables",
+      "name": "Vegetables",
+      "image": "categories/vegetables.png"
+    },
+    {
+      "id": "meat",
+      "name": "Meat & Fish",
+      "image": "categories/meat.png"
+    },
+    {
+      "id": "eggs",
+      "name": "Eggs",
+      "image": "categories/eggs.png"
+    }
+  ],
+  "products": [
+    {
+      "id": "diet-coke",
+      "name": "Diet Coke",
+      "category": "beverages",
+      "brand": "Cocola",
+      "meta": "355ml, Price",
+      "price": 1.99,
+      "rating": 4.8,
+      "reviews": 124,
+      "image": "beverages/DietCoke.png",
+      "description": "Refreshing diet cola served chilled.",
+      "tags": ["cold-drinks", "soda", "beverages"]
+    },
+    {
+      "id": "sprite-can",
+      "name": "Sprite Can",
+      "category": "beverages",
+      "brand": "Cocola",
+      "meta": "325ml, Price",
+      "price": 1.5,
+      "rating": 4.7,
+      "reviews": 96,
+      "image": "beverages/Sprite.png",
+      "description": "Lemon-lime soft drink with a crisp taste.",
+      "tags": ["cold-drinks", "soda", "beverages"]
+    },
+    {
+      "id": "apple-grape-juice",
+      "name": "Apple & Grape Juice",
+      "category": "beverages",
+      "brand": "Ifad",
+      "meta": "2L, Price",
+      "price": 15.99,
+      "rating": 4.6,
+      "reviews": 81,
+      "image": "beverages/AppleJuice.png",
+      "description": "Sweet mixed fruit juice for everyday refreshment.",
+      "tags": ["juice", "family-pack", "beverages"]
+    },
+    {
+      "id": "orange-juice",
+      "name": "Orange Juice",
+      "category": "beverages",
+      "brand": "Kazi Farmas",
+      "meta": "2L, Price",
+      "price": 15.99,
+      "rating": 4.5,
+      "reviews": 74,
+      "image": "beverages/OrangeJuice.png",
+      "description": "Classic orange juice with a bright citrus flavor.",
+      "tags": ["juice", "family-pack", "beverages"]
+    },
+    {
+      "id": "coca-cola-can",
+      "name": "Coca Cola Can",
+      "category": "beverages",
+      "brand": "Cocola",
+      "meta": "325ml, Price",
+      "price": 4.99,
+      "rating": 4.9,
+      "reviews": 142,
+      "image": "beverages/CocaCola.png",
+      "description": "Signature cola in a convenient can.",
+      "tags": ["cold-drinks", "soda", "beverages"]
+    },
+    {
+      "id": "pepsi-can",
+      "name": "Pepsi Can",
+      "category": "beverages",
+      "brand": "Individual Collection",
+      "meta": "330ml, Price",
+      "price": 4.99,
+      "rating": 4.4,
+      "reviews": 67,
+      "image": "beverages/Pepsi.png",
+      "description": "Popular cola drink with a bold taste.",
+      "tags": ["cold-drinks", "soda", "beverages"]
+    }
+  ]
+}

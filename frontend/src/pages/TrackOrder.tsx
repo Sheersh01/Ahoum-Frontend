@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const TrackOrder = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto w-full max-w-[430px] p-6">
+      <section className="mx-auto w-full  p-6">
         <header className="pt-4 text-center">
           <h1 className="text-[18px] font-semibold">Track Order</h1>
         </header>

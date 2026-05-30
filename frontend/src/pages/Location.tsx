@@ -27,17 +27,16 @@ const Location = () => {
       <form
         noValidate
         onSubmit={handleSubmit}
-        className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_42%,#fdebea_100%)]"
+        className="relative mx-auto min-h-screen w-full overflow-hidden"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_62%_9%,rgba(226,251,243,0.86)_0%,rgba(255,255,255,0)_31%),radial-gradient(circle_at_24%_88%,rgba(246,241,255,0.72)_0%,rgba(255,255,255,0)_35%)]" />
-
+       
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate("/verification")}
-          className="relative ml-[17px] mt-[12px] flex h-[14px] w-[14px] items-center justify-center"
+          className="relative ml-[17px] mt-[12px] pt-8 flex h-[14px] w-[14px] items-center justify-center"
         >
-          <img src={BackArrow} alt="" className="h-[10px] w-[6px]" />
+          <img src={BackArrow} alt="" className="w-[10px]" />
         </button>
 
         <div className="relative mt-[32px] flex justify-center">

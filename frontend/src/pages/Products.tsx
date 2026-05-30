@@ -1,11 +1,12 @@
 import { Link, useParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import StickyFooter from "../components/StickyFooter";
 import FilterPanel from "../components/FilterPanel";
-import PlusIcon from "../assets/Plus.png";
 import BackIcon from "../assets/back arrow.png";
 import FilterIcon from "../assets/filter.png";
+import ProductCard from "../components/ProductCard";
+import { useProductsStore } from "../store/productsStore";
 import DietCoke from "../assets/beverages/DietCoke.png";
 import Sprite from "../assets/beverages/Sprite.png";
 import AppleGrape from "../assets/beverages/AppleJuice.png";
@@ -18,97 +19,114 @@ type Product = {
   meta: string;
   price: string;
   image: string;
+  categories: string[];
+  brand: string;
 };
 
 const beveragesProducts: Product[] = [
-  { name: "Diet Coke", meta: "355ml, Price", price: "$1.99", image: DietCoke },
-  { name: "Sprite Can", meta: "325ml, Price", price: "$1.50", image: Sprite },
+  {
+    name: "Diet Coke",
+    meta: "355ml, Price",
+    price: "$1.99",
+    image: DietCoke,
+    categories: ["Fast Food"],
+    brand: "Cocola",
+  },
+  {
+    name: "Sprite Can",
+    meta: "325ml, Price",
+    price: "$1.50",
+    image: Sprite,
+    categories: ["Chips & Crisps"],
+    brand: "Cocola",
+  },
   {
     name: "Apple & Grape Juice",
     meta: "2L, Price",
     price: "$15.99",
     image: AppleGrape,
+    categories: ["Noodles & Pasta"],
+    brand: "Ifad",
   },
   {
     name: "Orange Juice",
     meta: "2L, Price",
     price: "$15.99",
     image: OrangeJuice,
+    categories: ["Eggs"],
+    brand: "Kazi Farmas",
   },
   {
     name: "Coca Cola Can",
     meta: "325ml, Price",
     price: "$4.99",
     image: CocaCola,
+    categories: ["Fast Food"],
+    brand: "Cocola",
   },
-  { name: "Pepsi Can", meta: "330ml, Price", price: "$4.99", image: Pepsi },
+  {
+    name: "Pepsi Can",
+    meta: "330ml, Price",
+    price: "$4.99",
+    image: Pepsi,
+    categories: ["Fast Food"],
+    brand: "Individual Collection",
+  },
 ];
 
 const productsByCategory: Record<string, Product[]> = {
   beverages: beveragesProducts,
 };
 
-const ProductCard = ({ product }: { product: Product }) => (
-  <article className="flex h-[170px] w-full flex-col justify-between rounded-[12px] border border-[#f0f0f0] bg-white p-[12px]">
-    <div className="flex items-center gap-[12px]">
-      <div className="h-[88px] w-[88px] flex-none rounded-[10px] bg-[#fafafa] flex items-center justify-center">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-[72px] w-[72px] object-contain"
-        />
-      </div>
-      <div className="flex-1">
-        <h3 className="text-[14px] font-semibold text-[#181725]">
-          {product.name}
-        </h3>
-        <p className="mt-[6px] text-[12px] text-[#7c7c7c]">{product.meta}</p>
-      </div>
-    </div>
-
-    <div className="mt-2 flex items-center justify-between">
-      <p className="text-[16px] font-bold text-[#181725]">{product.price}</p>
-      <button
-        type="button"
-        aria-label={`Add ${product.name}`}
-        className="flex h-[36px] w-[36px] items-center justify-center rounded-full bg-[#53b175]"
-      >
-        <img
-          src={PlusIcon}
-          alt=""
-          className="h-[14px] w-[14px] brightness-0 invert"
-        />
-      </button>
-    </div>
-  </article>
-);
-
 const Products = () => {
-  const [showFilter, setShowFilter] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([
-    "Eggs",
-  ]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>(["Cocola"]);
+  const searchQuery = useProductsStore((state) => state.searchQuery);
+  const selectedCategories = useProductsStore(
+    (state) => state.selectedCategories,
+  );
+  const selectedBrands = useProductsStore((state) => state.selectedBrands);
+  const isFilterOpen = useProductsStore((state) => state.isFilterOpen);
+  const setSearchQuery = useProductsStore((state) => state.setSearchQuery);
+  const toggleCategory = useProductsStore((state) => state.toggleCategory);
+  const toggleBrand = useProductsStore((state) => state.toggleBrand);
+  const openFilters = useProductsStore((state) => state.openFilters);
+  const closeFilters = useProductsStore((state) => state.closeFilters);
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
 
-  const toggleCategory = (c: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c],
-    );
-  };
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery.trim().toLowerCase());
+    }, 300);
 
-  const toggleBrand = (b: string) => {
-    setSelectedBrands((prev) =>
-      prev.includes(b) ? prev.filter((x) => x !== b) : [...prev, b],
-    );
-  };
+    return () => window.clearTimeout(timeoutId);
+  }, [searchQuery]);
 
   const applyFilters = () => {
-    // placeholder: apply filter logic here
-    setShowFilter(false);
+    closeFilters();
   };
   const params = useParams();
   const categorySlug = params.category ?? "";
   const items = productsByCategory[categorySlug] ?? beveragesProducts;
+
+  const filteredItems = items.filter((item) => {
+    const normalizedQuery = debouncedSearchQuery;
+    const matchesSearch =
+      normalizedQuery.length === 0 ||
+      item.name.toLowerCase().includes(normalizedQuery) ||
+      item.meta.toLowerCase().includes(normalizedQuery) ||
+      item.brand.toLowerCase().includes(normalizedQuery) ||
+      item.categories.some((category) =>
+        category.toLowerCase().includes(normalizedQuery),
+      );
+
+    const matchesCategory =
+      selectedCategories.length === 0 ||
+      item.categories.some((category) => selectedCategories.includes(category));
+
+    const matchesBrand =
+      selectedBrands.length === 0 || selectedBrands.includes(item.brand);
+
+    return matchesSearch && matchesCategory && matchesBrand;
+  });
 
   const displayName = categorySlug
     ? categorySlug
@@ -119,18 +137,18 @@ const Products = () => {
 
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto w-full max-w-[430px] pb-[28px]">
+      <section className="mx-auto w-full  pb-[28px]">
         <header className="mt-4 flex items-center justify-between px-4">
           <Link
             to="/home"
             className="h-[36px] w-[36px] flex items-center justify-center rounded-full bg-transparent"
           >
-            <img src={BackIcon} alt="Back" className="h-[18px] w-[18px]" />
+            <img src={BackIcon} alt="Back" className="w-[10px]" />
           </Link>
           <h1 className="text-[16px] font-semibold">{displayName}</h1>
           <button
             type="button"
-            onClick={() => setShowFilter(true)}
+            onClick={openFilters}
             aria-label="Open filters"
             className="h-[36px] w-[36px] flex items-center justify-center rounded-full bg-transparent"
           >
@@ -139,16 +157,16 @@ const Products = () => {
         </header>
 
         <div className="mt-4 px-4">
-          <SearchBar />
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
         </div>
 
         <div className="mt-4 px-4 pb-40">
-          <div className="grid grid-cols-2 gap-4">
-            {items.length > 0 ? (
-              items.map((p) => <ProductCard key={p.name} product={p} />)
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filteredItems.length > 0 ? (
+              filteredItems.map((p) => <ProductCard key={p.name} product={p} />)
             ) : (
-              <div className="col-span-2 mt-8 text-center text-[#7c7c7c]">
-                No products found for this category.
+              <div className="col-span-2 md:col-span-3 lg:col-span-4 mt-8 text-center text-[#7c7c7c]">
+                No products match your search or filters.
               </div>
             )}
           </div>
@@ -156,8 +174,8 @@ const Products = () => {
       </section>
 
       <FilterPanel
-        visible={showFilter}
-        onClose={() => setShowFilter(false)}
+        visible={isFilterOpen}
+        onClose={closeFilters}
         selectedCategories={selectedCategories}
         selectedBrands={selectedBrands}
         toggleCategory={toggleCategory}

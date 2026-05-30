@@ -1,56 +1,11 @@
 import { useState } from "react";
 import StickyFooter from "../components/StickyFooter";
 import CheckOut from "../components/CheckOut";
+import EmptyState from "../components/EmptyState";
 import { useNavigate } from "react-router";
 import MinusIcon from "../assets/Minus.png";
 import PlusIcon from "../assets/Plus.png";
-import AppleImage from "../assets/apple.png";
-import CarrotImage from "../assets/carrot.png";
-import PulsesImage from "../assets/pulses.png";
-
-type CartItem = {
-  id: string;
-  name: string;
-  meta: string;
-  price: number; // numeric for calculations
-  image: string;
-  qty: number;
-};
-
-const initialItems: CartItem[] = [
-  {
-    id: "pepper",
-    name: "Bell Pepper Red",
-    meta: "1kg, Price",
-    price: 4.99,
-    image: CarrotImage,
-    qty: 1,
-  },
-  {
-    id: "eggs",
-    name: "Egg Chicken Red",
-    meta: "4pcs, Price",
-    price: 1.99,
-    image: PulsesImage,
-    qty: 1,
-  },
-  {
-    id: "banana",
-    name: "Organic Bananas",
-    meta: "1kg, Price",
-    price: 3.0,
-    image: AppleImage,
-    qty: 1,
-  },
-  {
-    id: "ginger",
-    name: "Ginger",
-    meta: "250gm, Price",
-    price: 2.99,
-    image: CarrotImage,
-    qty: 1,
-  },
-];
+import { useCartStore, type CartItem } from "../store/cartStore";
 
 const CartRow = ({
   item,
@@ -94,7 +49,11 @@ const CartRow = ({
                 onClick={() => onChangeQty(item.id, Math.max(1, item.qty - 1))}
                 className="flex h-[32px] w-[32px] items-center justify-center rounded-md border border-[#e8e8e8] bg-white"
               >
-                <img src={MinusIcon} alt="-" className="h-[14px] w-[14px]" />
+                <img
+                  src={MinusIcon}
+                  alt="-"
+                  className="h-[14px] w-[14px] object-contain"
+                />
               </button>
 
               <div className="min-w-[28px] text-center text-[14px]">
@@ -109,7 +68,7 @@ const CartRow = ({
                 <img
                   src={PlusIcon}
                   alt="+"
-                  className="h-[14px] w-[14px] brightness-0 invert"
+                  className="h-[14px] w-[14px] object-contain"
                 />
               </button>
             </div>
@@ -127,12 +86,9 @@ const CartRow = ({
 };
 
 const MyCart = () => {
-  const [items, setItems] = useState<CartItem[]>(initialItems);
-
-  const removeItem = (id: string) =>
-    setItems((prev) => prev.filter((i) => i.id !== id));
-  const changeQty = (id: string, qty: number) =>
-    setItems((prev) => prev.map((i) => (i.id === id ? { ...i, qty } : i)));
+  const items = useCartStore((state) => state.items);
+  const removeItem = useCartStore((state) => state.removeItem);
+  const changeQty = useCartStore((state) => state.changeQty);
 
   const subtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
 
@@ -146,38 +102,44 @@ const MyCart = () => {
 
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto w-full max-w-[430px] pb-[140px]">
+      <section className="mx-auto w-full  pb-[140px]">
         <header className="pt-4 text-center">
           <h1 className="text-[18px] font-semibold">My Cart</h1>
         </header>
 
         <div className="mt-4 px-4">
-          {items.map((item) => (
-            <CartRow
-              key={item.id}
-              item={item}
-              onRemove={removeItem}
-              onChangeQty={changeQty}
-            />
-          ))}
+          {items.length > 0 ? (
+            items.map((item) => (
+              <CartRow
+                key={item.id}
+                item={item}
+                onRemove={removeItem}
+                onChangeQty={changeQty}
+              />
+            ))
+          ) : (
+            <EmptyState message="Your cart is empty. Add products from Home or Explore to start shopping." />
+          )}
         </div>
       </section>
 
-      <div className="fixed left-0 right-0 bottom-[94px] z-40 mx-auto w-full max-w-[430px] px-4">
-        <div className="rounded-[12px] bg-[#53b175] p-4 text-white">
-          <div className="flex items-center justify-between">
-            <button
-              className="text-[16px] font-semibold"
-              onClick={() => setShowCheckout(true)}
-            >
-              Go to Checkout
-            </button>
-            <div className="rounded-[8px] bg-white/20 px-3 py-1 text-[14px] font-semibold">
-              ${subtotal.toFixed(2)}
+      {items.length > 0 && (
+        <div className="fixed left-0 right-0 bottom-[94px] z-40 mx-auto w-full  px-4">
+          <div className="rounded-xl bg-[#53b175] p-4 text-white">
+            <div className="flex items-center justify-between">
+              <button
+                className="text-[16px] font-semibold"
+                onClick={() => setShowCheckout(true)}
+              >
+                Go to Checkout
+              </button>
+              <div className="rounded-[8px] bg-white/20 px-3 py-1 text-[14px] font-semibold">
+                ${subtotal.toFixed(2)}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <CheckOut
         visible={showCheckout}

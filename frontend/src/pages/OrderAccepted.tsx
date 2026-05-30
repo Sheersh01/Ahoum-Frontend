@@ -3,7 +3,7 @@ import { Link } from "react-router";
 const OrderAccepted = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto flex h-screen w-full max-w-[430px] flex-col items-center justify-center px-6">
+      <section className="mx-auto flex h-screen w-full  flex-col items-center justify-center px-6">
         <div className="mb-8 flex h-[160px] w-[160px] items-center justify-center rounded-full bg-green-50">
           <svg
             width="110"
@@ -32,7 +32,7 @@ const OrderAccepted = () => {
 
         <Link
           to="/track-order"
-          className="mb-4 w-full max-w-[360px] rounded-[12px] bg-[#53b175] py-3 text-center text-white font-semibold"
+          className="mb-4 w-full max-w-[360px] rounded-xl bg-[#53b175] py-3 text-center text-white font-semibold"
         >
           Track Order
         </Link>

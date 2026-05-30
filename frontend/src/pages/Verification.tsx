@@ -30,28 +30,27 @@ const Verification = () => {
       <form
         noValidate
         onSubmit={handleSubmit}
-        className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_42%,#fdebea_100%)]"
+        className="relative mx-auto min-h-screen w-full  overflow-hidden"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_62%_8%,rgba(226,251,243,0.86)_0%,rgba(255,255,255,0)_31%),radial-gradient(circle_at_23%_90%,rgba(246,241,255,0.72)_0%,rgba(255,255,255,0)_35%)]" />
 
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate("/number")}
-          className="relative ml-[24px] mt-[14px] flex h-[14px] w-[14px] items-center justify-center"
+          className="relative ml-[24px] mt-[14px] pt-8 flex h-[14px] w-[14px] items-center justify-center"
         >
-          <img src={BackArrow} alt="" className="h-[10px] w-[6px]" />
+          <img src={BackArrow} alt="" className="w-[10px]" />
         </button>
 
         <div className="relative px-[25px] pt-[35px]">
-          <h1 className="text-[17px] leading-[22px] font-semibold tracking-normal">
+          <h1 className="text-[20px] leading-[22px] font-semibold tracking-normal">
             Enter your 4-digit code
           </h1>
 
           <div className="mt-[20px]">
             <label
               htmlFor="verification-code"
-              className="block text-[10px] leading-[12px] font-medium text-[#7c7c7c]"
+              className="block text-[12px] leading-[12px] font-medium text-[#7c7c7c]"
             >
               Code
             </label>
@@ -72,7 +71,7 @@ const Verification = () => {
             {error && (
               <p
                 id="verification-code-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-[7px] text-[12px] leading-[12px] font-medium text-red-500"
               >
                 {error}
               </p>

@@ -11,27 +11,31 @@ import BakeryImage from "../assets/categories/bakery.png";
 import EggsImage from "../assets/categories/eggs.png";
 import MeatImage from "../assets/categories/meat.png";
 import OilImage from "../assets/categories/oil.png";
+import { useCartStore } from "../store/cartStore";
 
 type Product = {
+  id: string;
   name: string;
   meta: string;
-  price: string;
+  price: number;
   image: string;
   imageClassName?: string;
 };
 
 const exclusiveOffers: Product[] = [
   {
+    id: "organic-bananas-home",
     name: "Organic Bananas",
-    meta: "7pcs, Priceg",
-    price: "$4.99",
+    meta: "7pcs, Price",
+    price: 4.99,
     image: VegetablesImage,
     imageClassName: "w-[92px]",
   },
   {
+    id: "red-apple-home",
     name: "Red Apple",
-    meta: "1kg, Priceg",
-    price: "$4.99",
+    meta: "1kg, Price",
+    price: 4.99,
     image: AppleImage,
     imageClassName: "w-[98px]",
   },
@@ -39,23 +43,26 @@ const exclusiveOffers: Product[] = [
 
 const bestSelling: Product[] = [
   {
+    id: "fresh-vegetables-home",
     name: "Fresh Vegetables",
-    meta: "1kg, Priceg",
-    price: "$3.99",
+    meta: "1kg, Price",
+    price: 3.99,
     image: VegetablesImage,
     imageClassName: "w-[100px]",
   },
   {
+    id: "bakery-snacks-home",
     name: "Bakery Snacks",
-    meta: "325gm, Priceg",
-    price: "$2.99",
+    meta: "325gm, Price",
+    price: 2.99,
     image: BakeryImage,
     imageClassName: "w-[94px]",
   },
   {
+    id: "white-eggs-home",
     name: "White Eggs",
-    meta: "12pcs, Priceg",
-    price: "$1.99",
+    meta: "12pcs, Price",
+    price: 1.99,
     image: EggsImage,
     imageClassName: "w-[96px]",
   },
@@ -63,16 +70,18 @@ const bestSelling: Product[] = [
 
 const groceryProducts: Product[] = [
   {
+    id: "beef-bone-home",
     name: "Beef Bone",
-    meta: "1kg, Priceg",
-    price: "$4.99",
+    meta: "1kg, Price",
+    price: 4.99,
     image: MeatImage,
     imageClassName: "w-[96px]",
   },
   {
+    id: "broiler-chicken-home",
     name: "Broiler Chicken",
-    meta: "1kg, Priceg",
-    price: "$4.99",
+    meta: "1kg, Price",
+    price: 4.99,
     image: EggsImage,
     imageClassName: "w-[98px]",
   },
@@ -92,10 +101,18 @@ const groceries = [
 ];
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const addItem = useCartStore((state) => state.addItem);
+
   return (
     <article className="flex h-[200px] w-[140px] shrink-0 flex-col rounded-[13px] border border-[#e2e2e2] bg-white px-[11px] pb-[11px] pt-[14px]">
       <Link
         to="/product-detail"
+        state={{
+          image: product.image,
+          name: product.name,
+          meta: product.meta,
+          price: `$${product.price.toFixed(2)}`,
+        }}
         className="flex h-[82px] items-center justify-center"
         aria-label={`View ${product.name}`}
       >
@@ -115,11 +132,20 @@ const ProductCard = ({ product }: { product: Product }) => {
 
       <div className="mt-auto flex items-end justify-between">
         <p className="pb-[8px] text-[14px] leading-none font-bold text-[#181725]">
-          {product.price}
+          ${product.price.toFixed(2)}
         </p>
         <button
           type="button"
           aria-label={`Add ${product.name} to cart`}
+          onClick={() =>
+            addItem({
+              id: product.id,
+              name: product.name,
+              meta: product.meta,
+              price: product.price,
+              image: product.image,
+            })
+          }
           className="flex h-[37px] w-[37px] items-center justify-center rounded-[13px] bg-[#53b175]"
         >
           <img
@@ -209,23 +235,25 @@ const GroceriesSection = () => {
 const HomeScreen = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-white pb-[28px]">
-        <header className="pt-[20px] text-center">
-          <img
-            src={CarrotLogo}
-            alt="Nectar"
-            className="mx-auto h-[26px] w-[26px]"
-          />
-          <div className="mt-[7px] flex items-center justify-center gap-[6px]">
-            <img src={LocationIcon} alt="" className="h-[16px] w-[12px]" />
-            <p className="text-[14px] leading-none font-semibold text-[#4c4f4d]">
-              Dhaka, Banassre
-            </p>
-          </div>
-        </header>
+      <section className="mx-auto min-h-screen w-full  overflow-hidden bg-white pb-[100px] pt-4">
+        <div className="md:flex w-full items-center">
+          <header className="pt-[20px] text-center md:w-[20%]">
+            <img
+              src={CarrotLogo}
+              alt="Nectar"
+              className="mx-auto h-[26px] w-[26px]"
+            />
+            <div className="mt-[7px] flex items-center justify-center gap-[6px]">
+              <img src={LocationIcon} alt="" className="h-[16px] w-[12px]" />
+              <p className="text-[14px] md:text-[12px] leading-none font-semibold text-[#4c4f4d]">
+                Dhaka, Banassre
+              </p>
+            </div>
+          </header>
 
-        <div className="mt-[20px] px-[27px]">
-          <SearchBar />
+          <div className="mt-[20px] px-[27px] md:w-[80%]">
+            <SearchBar />
+          </div>
         </div>
 
         <div className="mt-[17px] px-[27px]">

@@ -17,7 +17,9 @@ const Onboarding = () => {
         {/* Text Content with Dark Background */}
         <div className="w-full rounded-3xl p-8 space-y-6 text-center">
           {/* Heading */}
-          <div className="w-full"><img src={Carrot} alt="Carrot" className="mx-auto" /></div>
+          <div className="w-full">
+            <img src={Carrot} alt="Carrot" className="mx-auto" />
+          </div>
           <div>
             <h1 className="text-4xl font-bold text-white mb-2">
               Welcome
@@ -32,7 +34,7 @@ const Onboarding = () => {
           {/* Get Started Button */}
           <Link
             to="/signin"
-            className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-full transition-colors duration-200"
+            className="block w-full  bg-[#53B175] hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200"
           >
             Get Started
           </Link>

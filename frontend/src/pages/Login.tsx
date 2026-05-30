@@ -18,7 +18,8 @@ const Login = () => {
 
     const nextErrors = {
       email: isValidEmail ? "" : "Enter a valid email.",
-      password: password.length >= 6 ? "" : "Password must be at least 6 characters.",
+      password:
+        password.length >= 6 ? "" : "Password must be at least 6 characters.",
     };
 
     setErrors(nextErrors);
@@ -32,11 +33,9 @@ const Login = () => {
 
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_43%,#fdeceb_100%)]">
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[46%] bg-[linear-gradient(145deg,rgba(246,241,255,0.8)_0%,rgba(255,255,255,0.72)_42%,rgba(233,250,244,0.72)_73%,rgba(248,238,248,0.85)_100%)]" />
-
-        <div className="relative flex justify-center pt-[25px]">
-          <img src={CarrotIcon} alt="Nectar" className="h-[40px] w-[40px]" />
+      <section className="relative mx-auto min-h-screen w-full overflow-hidden">
+        <div className="relative flex justify-center pt-20">
+          <img src={CarrotIcon} alt="Nectar" className="w-12" />
         </div>
 
         <form
@@ -107,7 +106,9 @@ const Login = () => {
               />
               <button
                 type="button"
-                aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+                aria-label={
+                  isPasswordVisible ? "Hide password" : "Show password"
+                }
                 onClick={() => setIsPasswordVisible((value) => !value)}
                 className="flex h-[18px] w-[18px] items-center justify-center"
               >
@@ -136,12 +137,12 @@ const Login = () => {
 
           <button
             type="submit"
-            className="mt-[20px] flex h-[46px] w-full items-center justify-center rounded-[12px] bg-[#53b175] text-[13px] leading-none font-semibold text-white"
+            className="mt-[20px] flex h-[46px] w-full items-center justify-center rounded-xl bg-[#53b175] text-[13px] leading-none font-semibold text-white"
           >
             Log In
           </button>
 
-          <p className="mt-[17px] text-center text-[10px] leading-[12px] font-semibold text-[#181725]">
+          <p className="mt-[17px] text-center text-[12px] leading-[12px] font-semibold text-[#181725]">
             Don&apos;t have an account?{" "}
             <Link to="/signup" className="font-semibold text-[#53b175]">
               Signup

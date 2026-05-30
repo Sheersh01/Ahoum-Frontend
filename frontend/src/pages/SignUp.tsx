@@ -24,7 +24,8 @@ const SignUp = () => {
     const nextErrors = {
       username: username.trim().length >= 2 ? "" : "Enter your name.",
       email: isValidEmail ? "" : "Enter a valid email.",
-      password: password.length >= 6 ? "" : "Password must be at least 6 characters.",
+      password:
+        password.length >= 6 ? "" : "Password must be at least 6 characters.",
     };
 
     setErrors(nextErrors);
@@ -38,7 +39,7 @@ const SignUp = () => {
 
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="relative mx-auto min-h-screen w-full max-w-[430px] overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_43%,#fdeceb_100%)]">
+      <section className="relative mx-auto min-h-screen w-full  overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_43%,#fdeceb_100%)]">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[46%] bg-[linear-gradient(145deg,rgba(246,241,255,0.82)_0%,rgba(255,255,255,0.72)_42%,rgba(233,250,244,0.72)_73%,rgba(248,238,248,0.86)_100%)]" />
 
         <div className="relative flex justify-center pt-[20px]">
@@ -166,7 +167,9 @@ const SignUp = () => {
               />
               <button
                 type="button"
-                aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+                aria-label={
+                  isPasswordVisible ? "Hide password" : "Show password"
+                }
                 onClick={() => setIsPasswordVisible((value) => !value)}
                 className="flex h-[18px] w-[18px] items-center justify-center"
               >
@@ -198,7 +201,7 @@ const SignUp = () => {
 
           <button
             type="submit"
-            className="mt-[18px] flex h-[46px] w-full items-center justify-center rounded-[12px] bg-[#53b175] text-[13px] leading-none font-semibold text-white"
+            className="mt-[18px] flex h-[46px] w-full items-center justify-center rounded-xl bg-[#53b175] text-[13px] leading-none font-semibold text-white"
           >
             Sign Up
           </button>
