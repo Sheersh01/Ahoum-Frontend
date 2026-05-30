@@ -226,7 +226,7 @@ const ProductDetail = () => {
                 quantity,
               )
             }
-            className="mt-[7px] flex h-[40px] w-full items-center justify-center rounded-[10px] bg-[#53b175] text-[11px] leading-none font-semibold text-white"
+            className="mt-[7px] flex h-[40px] w-full items-center justify-center rounded-[10px] bg-[#53B175] text-[11px] leading-none font-semibold text-white"
           >
             Add To Basket
           </button>

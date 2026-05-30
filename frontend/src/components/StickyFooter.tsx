@@ -35,28 +35,34 @@ const navItems = [
 
 const StickyFooter = () => {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-50 mx-auto block lg:hidden h-[80px] w-full rounded-t-[16px] border border-[#f0f0f0] bg-white shadow-[0_-4px_18px_rgba(0,0,0,0.08)]">
-      <div className="flex h-full items-start justify-around px-[26px] pt-[15px]">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.label}
-            to={item.to}
-            className={({ isActive }) =>
-              `flex min-w-[45px] flex-col items-center gap-[7px] text-[13px] leading-none font-semibold ${
-                isActive ? "text-[#53b175]" : "text-[#181725]"
-              }`
-            }
-          >
-            <img
-              src={item.icon}
-              alt=""
-              className="h-[23px] w-[23px] object-contain"
-            />
-            <span>{item.label}</span>
-          </NavLink>
-        ))}
-      </div>
-    </nav>
+    <footer className="fixed inset-x-0 bottom-0 z-50 lg:hidden">
+      <nav
+        aria-label="Primary"
+        className="mx-auto w-full rounded-t-2xl border border-slate-100 bg-white/95 shadow-[0_-0.25rem_1.125rem_rgba(0,0,0,0.08)] backdrop-blur"
+      >
+        <ul className="flex h-20 items-start justify-around px-6 pt-4">
+          {navItems.map((item) => (
+            <li key={item.label}>
+              <NavLink
+                to={item.to}
+                className={({ isActive }) =>
+                  `flex min-w-11 flex-col items-center gap-2 text-xs font-semibold leading-none ${
+                    isActive ? "text-brand" : "text-slate-900"
+                  }`
+                }
+              >
+                <img
+                  src={item.icon}
+                  alt=""
+                  className="h-6 w-6 object-contain"
+                />
+                <span>{item.label}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </footer>
   );
 };
 

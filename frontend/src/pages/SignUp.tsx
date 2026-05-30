@@ -38,30 +38,32 @@ const SignUp = () => {
   };
 
   return (
-    <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="relative mx-auto min-h-screen w-full  overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_43%,#fdeceb_100%)]">
+    <main className="min-h-screen w-full bg-white font-sans text-slate-900">
+      <section className="relative mx-auto min-h-screen w-full overflow-hidden bg-[linear-gradient(115deg,#fbfaf6_0%,#ffffff_43%,#fdeceb_100%)]">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[46%] bg-[linear-gradient(145deg,rgba(246,241,255,0.82)_0%,rgba(255,255,255,0.72)_42%,rgba(233,250,244,0.72)_73%,rgba(248,238,248,0.86)_100%)]" />
 
-        <div className="relative flex justify-center pt-[20px]">
-          <img src={CarrotIcon} alt="Nectar" className="h-[40px] w-[40px]" />
+        <div className="relative flex justify-center pt-5">
+          <img src={CarrotIcon} alt="Nectar" className="h-10 w-10" />
         </div>
 
         <form
           noValidate
           onSubmit={handleSubmit}
-          className="relative px-[26px] pt-[68px]"
+          className="relative px-6 pt-16 sm:px-8 sm:pt-20"
         >
-          <h1 className="text-[18px] leading-[22px] font-semibold tracking-normal">
-            Sign Up
-          </h1>
-          <p className="mt-[9px] text-[11px] leading-[14px] font-medium text-[#7c7c7c]">
-            Enter your credentials to continue
-          </p>
+          <header>
+            <h1 className="text-lg font-semibold leading-6 tracking-normal sm:text-xl">
+              Sign Up
+            </h1>
+            <p className="mt-2 text-xs font-medium leading-4 text-slate-500 sm:text-sm sm:leading-5">
+              Enter your credentials to continue
+            </p>
+          </header>
 
-          <div className="mt-[31px]">
+          <div className="mt-8">
             <label
               htmlFor="username"
-              className="block text-[11px] leading-[13px] font-medium text-[#7c7c7c]"
+              className="block text-xs font-medium leading-4 text-slate-500"
             >
               Username
             </label>
@@ -78,27 +80,27 @@ const SignUp = () => {
               aria-describedby={
                 errors.username ? "signup-username-error" : undefined
               }
-              className="mt-[13px] h-[18px] w-full border-0 bg-transparent p-0 text-[12px] leading-[18px] font-medium text-[#181725] outline-none"
+              className="mt-3 h-5 w-full border-0 bg-transparent p-0 text-sm font-medium leading-5 text-slate-900 outline-none"
             />
-            <div className="mt-[11px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
             {errors.username && (
               <p
                 id="signup-username-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-2 text-xs font-medium leading-4 text-red-500"
               >
                 {errors.username}
               </p>
             )}
           </div>
 
-          <div className="mt-[25px]">
+          <div className="mt-6">
             <label
               htmlFor="email"
-              className="block text-[11px] leading-[13px] font-medium text-[#7c7c7c]"
+              className="block text-xs font-medium leading-4 text-slate-500"
             >
               Email
             </label>
-            <div className="mt-[13px] flex h-[18px] items-center">
+            <div className="mt-3 flex h-5 items-center gap-3">
               <input
                 id="email"
                 type="email"
@@ -112,12 +114,12 @@ const SignUp = () => {
                 aria-describedby={
                   errors.email ? "signup-email-error" : undefined
                 }
-                className="h-[18px] min-w-0 flex-1 border-0 bg-transparent p-0 text-[12px] leading-[18px] font-medium text-[#181725] outline-none"
+                className="h-5 min-w-0 flex-1 border-0 bg-transparent p-0 text-sm font-medium leading-5 text-slate-900 outline-none"
               />
               <svg
                 aria-hidden="true"
                 viewBox="0 0 16 16"
-                className={`h-[13px] w-[13px] shrink-0 ${
+                className={`h-3.5 w-3.5 shrink-0 ${
                   isValidEmail ? "text-[#53b175]" : "text-[#b1b1b1]"
                 }`}
               >
@@ -131,25 +133,25 @@ const SignUp = () => {
                 />
               </svg>
             </div>
-            <div className="mt-[11px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
             {errors.email && (
               <p
                 id="signup-email-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-2 text-xs font-medium leading-4 text-red-500"
               >
                 {errors.email}
               </p>
             )}
           </div>
 
-          <div className="mt-[25px]">
+          <div className="mt-6">
             <label
               htmlFor="password"
-              className="block text-[11px] leading-[13px] font-medium text-[#7c7c7c]"
+              className="block text-xs font-medium leading-4 text-slate-500"
             >
               Password
             </label>
-            <div className="mt-[14px] flex h-[18px] items-center">
+            <div className="mt-3 flex h-5 items-center gap-3">
               <input
                 id="password"
                 type={isPasswordVisible ? "text" : "password"}
@@ -163,7 +165,7 @@ const SignUp = () => {
                 aria-describedby={
                   errors.password ? "signup-password-error" : undefined
                 }
-                className="h-[18px] min-w-0 flex-1 border-0 bg-transparent p-0 text-[20px] leading-none tracking-[4px] text-[#181725] outline-none"
+                className="h-5 min-w-0 flex-1 border-0 bg-transparent p-0 text-xl leading-none tracking-[0.25rem] text-slate-900 outline-none"
               />
               <button
                 type="button"
@@ -171,50 +173,50 @@ const SignUp = () => {
                   isPasswordVisible ? "Hide password" : "Show password"
                 }
                 onClick={() => setIsPasswordVisible((value) => !value)}
-                className="flex h-[18px] w-[18px] items-center justify-center"
+                className="flex h-5 w-5 items-center justify-center"
               >
-                <img src={HideEyeIcon} alt="" className="h-[13px] w-[15px]" />
+                <img src={HideEyeIcon} alt="" className="h-3.5 w-4" />
               </button>
             </div>
-            <div className="mt-[11px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
             {errors.password && (
               <p
                 id="signup-password-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-2 text-xs font-medium leading-4 text-red-500"
               >
                 {errors.password}
               </p>
             )}
           </div>
 
-          <p className="mt-[12px] text-[10px] leading-[17px] font-medium text-[#7c7c7c]">
+          <p className="mt-3 text-xs font-medium leading-5 text-slate-500 sm:text-sm">
             By continuing you agree to our{" "}
-            <button type="button" className="text-[#53b175]">
+            <button type="button" className="text-brand">
               Terms of Service
             </button>
             <br />
             and{" "}
-            <button type="button" className="text-[#53b175]">
+            <button type="button" className="text-brand">
               Privacy Policy.
             </button>
           </p>
 
           <button
             type="submit"
-            className="mt-[18px] flex h-[46px] w-full items-center justify-center rounded-xl bg-[#53b175] text-[13px] leading-none font-semibold text-white"
+            className="mt-4 flex h-11.5 w-full items-center justify-center rounded-xl bg-[#53B175] text-sm font-semibold leading-none text-white"
           >
             Sign Up
           </button>
 
-          <p className="mt-[17px] text-center text-[10px] leading-[12px] font-semibold text-[#181725]">
+          <p className="mt-4 text-center text-xs font-semibold leading-4 text-slate-900">
             Already have an account?{" "}
-            <Link to="/login" className="font-semibold text-[#53b175]">
+            <Link to="/login" className="font-semibold text-brand">
               Login
             </Link>
           </p>
         </form>
 
-        <div className="absolute bottom-[7px] left-1/2 h-[4px] w-[93px] -translate-x-1/2 rounded-full bg-[#c8d1d2]" />
+        <div className="absolute bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-[#c8d1d2]" />
       </section>
     </main>
   );

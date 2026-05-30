@@ -1,14 +1,6 @@
 import { create } from "zustand";
 import { toast } from "react-toastify";
-
-export type CartItem = {
-  id: string;
-  name: string;
-  meta: string;
-  price: number;
-  image: string;
-  qty: number;
-};
+import type { CartItem } from "../types";
 
 type CartState = {
   items: CartItem[];

@@ -26,100 +26,115 @@ const CheckOut = ({
 
   if (!visible && !entered) return null;
 
-  const panelClass = `relative z-[101] mx-auto w-full  bg-white p-6 shadow-lg transition-transform duration-300 mb-0 ${entered ? "translate-y-0" : "translate-y-full"}`;
-
   const closeWithAnimation = () => {
     setEntered(false);
     setTimeout(onClose, 300);
   };
 
-  const placeOrder = () => {
+  const handlePlaceOrder = () => {
     setEntered(false);
+
     setTimeout(() => {
       onPlaceOrder?.();
       onClose();
     }, 300);
   };
 
+  const rows = [
+    {
+      label: "Delivery",
+      content: <span className="text-sm font-medium">Select Method</span>,
+    },
+    {
+      label: "Payment",
+      content: (
+        <div className="flex items-center gap-2">
+          <div className="h-4 w-6 rounded-sm bg-linear-to-r from-blue-500 to-red-400" />
+        </div>
+      ),
+    },
+    {
+      label: "Promo Code",
+      content: <span className="text-sm font-medium">Pick discount</span>,
+    },
+    {
+      label: "Total Cost",
+      content: <span className="text-base font-semibold">{totalCost}</span>,
+    },
+  ];
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center">
-      <div
-        className={`absolute inset-0 bg-black/30 transition-opacity ${entered ? "opacity-100" : "opacity-0"}`}
+    <div className="fixed inset-0 z-100 flex items-end justify-center sm:items-center">
+      {/* Overlay */}
+      <button
+        type="button"
+        aria-label="Close checkout"
         onClick={closeWithAnimation}
+        className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
+          entered ? "opacity-100" : "opacity-0"
+        }`}
       />
 
-      <div
-        className={`${panelClass}`}
-        style={{ transform: entered ? "translateY(0)" : "translateY(100%)" }}
+      {/* Modal */}
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checkout-title"
+        className={`relative z-101 w-full max-w-md bg-white p-6 shadow-lg transition-all duration-300 ${
+          entered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+        }`}
       >
-        <div className="mb-4 flex items-start justify-between">
-          <h2 className="text-[18px] font-semibold">Checkout</h2>
+        <header className="mb-5 flex items-center justify-between">
+          <h2
+            id="checkout-title"
+            className="text-lg font-semibold text-gray-900"
+          >
+            Checkout
+          </h2>
+
           <button
             type="button"
+            aria-label="Close checkout"
             onClick={closeWithAnimation}
-            aria-label="Close"
-            className="text-[20px]"
+            className="text-2xl leading-none text-gray-600 hover:text-gray-900"
           >
             ×
           </button>
-        </div>
+        </header>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between border-b border-[#f0f0f0] pb-3">
-            <div>
-              <div className="text-[13px] text-[#7c7c7c]">Delivery</div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[13px] font-medium">Select Method</span>
-              <img src={FrontArrow} alt="" className="h-[14px] w-[14px]" />
-            </div>
-          </div>
+          {rows.map(({ label, content }) => (
+            <div
+              key={label}
+              className="flex items-center justify-between border-b border-gray-100 pb-3"
+            >
+              <span className="text-sm text-gray-500">{label}</span>
 
-          <div className="flex items-center justify-between border-b border-[#f0f0f0] pb-3">
-            <div>
-              <div className="text-[13px] text-[#7c7c7c]">Payment</div>
+              <div className="flex items-center gap-3">
+                {content}
+                <img
+                  src={FrontArrow}
+                  alt=""
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                />
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="h-[18px] w-[26px] rounded-sm bg-gradient-to-r from-blue-500 to-red-400" />
-              <img src={FrontArrow} alt="" className="h-[14px] w-[14px]" />
-            </div>
-          </div>
+          ))}
 
-          <div className="flex items-center justify-between border-b border-[#f0f0f0] pb-3">
-            <div>
-              <div className="text-[13px] text-[#7c7c7c]">Promo Code</div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[13px] font-medium">Pick discount</span>
-              <img src={FrontArrow} alt="" className="h-[14px] w-[14px]" />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between border-b border-[#f0f0f0] pb-3">
-            <div>
-              <div className="text-[13px] text-[#7c7c7c]">Total Cost</div>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[14px] font-semibold">{totalCost}</span>
-              <img src={FrontArrow} alt="" className="h-[14px] w-[14px]" />
-            </div>
-          </div>
-
-          <p className="mt-2 text-[12px] text-[#7c7c7c]">
-            By placing an order you agree to our Terms And Conditions
+          <p className="text-xs leading-relaxed text-gray-500">
+            By placing an order, you agree to our Terms and Conditions.
           </p>
         </div>
 
-        <div className="mt-6">
-          <button
-            type="button"
-            onClick={placeOrder}
-            className="w-full rounded-[10px] bg-[#53b175] py-3 text-white font-semibold"
-          >
-            Place Order
-          </button>
-        </div>
-      </div>
+        <button
+          type="button"
+          onClick={handlePlaceOrder}
+          className="mt-6 w-full rounded-xl bg-[#53B175] py-3 font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Place Order
+        </button>
+      </section>
     </div>
   );
 };

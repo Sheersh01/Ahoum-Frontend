@@ -23,50 +23,49 @@ const Location = () => {
   };
 
   return (
-    <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
+    <main className="min-h-screen w-full bg-white font-sans text-slate-900">
       <form
         noValidate
         onSubmit={handleSubmit}
-        className="relative mx-auto min-h-screen w-full overflow-hidden"
+        className="mx-auto flex min-h-screen w-full flex-col overflow-hidden px-4 pb-10 pt-3 sm:px-6 lg:px-8"
       >
-       
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate("/verification")}
-          className="relative ml-[17px] mt-[12px] pt-8 flex h-[14px] w-[14px] items-center justify-center"
+          className="flex h-9 w-9 items-center justify-center rounded-full bg-transparent"
         >
-          <img src={BackArrow} alt="" className="w-[10px]" />
+          <img src={BackArrow} alt="" className="w-2.5" />
         </button>
 
-        <div className="relative mt-[32px] flex justify-center">
+        <div className="mt-8 flex justify-center">
           <img
             src={MapImage}
             alt="Map pin"
-            className="h-auto w-[132px] select-none"
+            className="h-auto w-32 select-none sm:w-36"
             draggable={false}
           />
         </div>
 
-        <div className="relative px-[17px] pt-[26px] text-center">
-          <h1 className="text-[16px] leading-[20px] font-semibold">
+        <header className="pt-6 text-center">
+          <h1 className="text-base font-semibold leading-5 sm:text-lg">
             Select Your Location
           </h1>
-          <p className="mx-auto mt-[8px] max-w-[190px] text-[10px] leading-[12px] font-medium text-[#7c7c7c]">
+          <p className="mx-auto mt-2 max-w-48 text-xs font-medium leading-4 text-slate-500 sm:text-sm">
             Switch on your location to stay in tune with what&apos;s happening
             in your area
           </p>
-        </div>
+        </header>
 
-        <div className="relative mt-[62px] px-[17px]">
+        <section className="mt-14 space-y-5 sm:mt-16">
           <div>
             <label
               htmlFor="zone"
-              className="block text-left text-[10px] leading-[12px] font-medium text-[#7c7c7c]"
+              className="block text-left text-xs font-medium leading-4 text-slate-500"
             >
               Your Zone
             </label>
-            <div className="relative mt-[12px] flex h-[19px] items-center">
+            <div className="relative mt-3 flex h-5 items-center">
               <select
                 id="zone"
                 value={zone}
@@ -74,7 +73,7 @@ const Location = () => {
                   setZone(event.target.value);
                   setError("");
                 }}
-                className="h-full w-full appearance-none border-0 bg-transparent p-0 text-[11px] leading-none font-medium text-[#181725] outline-none"
+                className="h-full w-full appearance-none border-0 bg-transparent p-0 text-sm font-medium leading-none text-slate-900 outline-none"
               >
                 <option value="Banasree">Banasree</option>
                 <option value="Gulshan">Gulshan</option>
@@ -84,20 +83,20 @@ const Location = () => {
               <img
                 src={DropDownArrow}
                 alt=""
-                className="pointer-events-none absolute right-0 h-[5px] w-[8px]"
+                className="pointer-events-none absolute right-0 h-1.5 w-2"
               />
             </div>
-            <div className="mt-[9px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
           </div>
 
-          <div className="mt-[22px]">
+          <div>
             <label
               htmlFor="area"
-              className="block text-left text-[10px] leading-[12px] font-medium text-[#7c7c7c]"
+              className="block text-left text-xs font-medium leading-4 text-slate-500"
             >
               Your Area
             </label>
-            <div className="relative mt-[12px] flex h-[19px] items-center">
+            <div className="relative mt-3 flex h-5 items-center">
               <select
                 id="area"
                 value={area}
@@ -108,7 +107,7 @@ const Location = () => {
                 required
                 aria-invalid={Boolean(error)}
                 aria-describedby={error ? "location-error" : undefined}
-                className="h-full w-full appearance-none border-0 bg-transparent p-0 text-[11px] leading-none font-medium text-[#181725] outline-none invalid:text-[#b1b1b1]"
+                className="h-full w-full appearance-none border-0 bg-transparent p-0 text-sm font-medium leading-none text-slate-900 outline-none invalid:text-slate-400"
               >
                 <option value="" disabled>
                   Types of your area
@@ -120,14 +119,14 @@ const Location = () => {
               <img
                 src={DropDownArrow}
                 alt=""
-                className="pointer-events-none absolute right-0 h-[5px] w-[8px]"
+                className="pointer-events-none absolute right-0 h-1.5 w-2"
               />
             </div>
-            <div className="mt-[9px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
             {error && (
               <p
                 id="location-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-2 text-xs font-medium leading-4 text-red-500"
               >
                 {error}
               </p>
@@ -136,11 +135,11 @@ const Location = () => {
 
           <button
             type="submit"
-            className="mt-[23px] flex h-[39px] w-full items-center justify-center rounded-[9px] bg-[#53b175] text-[11px] leading-none font-semibold text-white"
+            className="flex h-10 w-full items-center justify-center rounded-xl bg-[#53B175] text-sm font-semibold leading-none text-white"
           >
             Submit
           </button>
-        </div>
+        </section>
       </form>
     </main>
   );

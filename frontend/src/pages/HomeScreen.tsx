@@ -104,7 +104,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   const addItem = useCartStore((state) => state.addItem);
 
   return (
-    <article className="flex h-[200px] w-[140px] shrink-0 flex-col rounded-[13px] border border-[#e2e2e2] bg-white px-[11px] pb-[11px] pt-[14px]">
+    <article className="flex h-50 w-35 shrink-0 flex-col rounded-xl border border-slate-200 bg-white px-3 pb-3 pt-3.5">
       <Link
         to="/product-detail"
         state={{
@@ -113,25 +113,25 @@ const ProductCard = ({ product }: { product: Product }) => {
           meta: product.meta,
           price: `$${product.price.toFixed(2)}`,
         }}
-        className="flex h-[82px] items-center justify-center"
+        className="flex h-20 items-center justify-center"
         aria-label={`View ${product.name}`}
       >
         <img
           src={product.image}
           alt={product.name}
-          className={`h-auto object-contain ${product.imageClassName ?? "w-[96px]"}`}
+          className={`h-auto object-contain ${product.imageClassName ?? "w-24"}`}
         />
       </Link>
 
-      <h3 className="mt-[16px] text-[13px] leading-[16px] font-semibold text-[#181725]">
+      <h3 className="mt-4 text-[0.8125rem] leading-4 font-semibold text-slate-900">
         {product.name}
       </h3>
-      <p className="mt-[3px] text-[11px] leading-[13px] font-medium text-[#7c7c7c]">
+      <p className="mt-0.5 text-[0.6875rem] leading-3.5 font-medium text-slate-500">
         {product.meta}
       </p>
 
       <div className="mt-auto flex items-end justify-between">
-        <p className="pb-[8px] text-[14px] leading-none font-bold text-[#181725]">
+        <p className="pb-2 text-sm leading-none font-bold text-slate-900">
           ${product.price.toFixed(2)}
         </p>
         <button
@@ -146,12 +146,12 @@ const ProductCard = ({ product }: { product: Product }) => {
               image: product.image,
             })
           }
-          className="flex h-[37px] w-[37px] items-center justify-center rounded-[13px] bg-[#53b175]"
+          className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#53B175]"
         >
           <img
             src={PlusIcon}
             alt=""
-            className="h-[14px] w-[14px] brightness-0 invert"
+            className="h-3.5 w-3.5 brightness-0 invert"
           />
         </button>
       </div>
@@ -167,100 +167,104 @@ const ProductSection = ({
   products: Product[];
 }) => {
   return (
-    <section className="mt-[22px]">
-      <div className="flex items-center justify-between px-[27px]">
-        <h2 className="text-[20px] leading-[24px] font-semibold text-[#181725]">
+    <section className="mt-6">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8">
+        <h2 className="text-xl font-semibold leading-6 text-slate-900">
           {title}
         </h2>
         <button
           type="button"
-          className="text-[12px] leading-none font-semibold text-[#53b175]"
+          className="text-xs font-semibold leading-none text-brand"
         >
           See all
         </button>
       </div>
 
-      <div className="mt-[17px] flex gap-[13px] overflow-x-auto px-[27px] pb-[2px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <ul className="scrollbar-none mt-4 flex gap-3 overflow-x-auto px-4 pb-0.5 sm:px-6 lg:px-8 [&::-webkit-scrollbar]:hidden">
         {products.map((product) => (
-          <ProductCard key={product.name} product={product} />
+          <li key={product.name}>
+            <ProductCard product={product} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 };
 
 const GroceriesSection = () => {
   return (
-    <section className="mt-[22px]">
-      <div className="flex items-center justify-between px-[27px]">
-        <h2 className="text-[20px] leading-[24px] font-semibold text-[#181725]">
+    <section className="mt-6">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8">
+        <h2 className="text-xl font-semibold leading-6 text-slate-900">
           Groceries
         </h2>
         <button
           type="button"
-          className="text-[12px] leading-none font-semibold text-[#53b175]"
+          className="text-xs font-semibold leading-none text-brand"
         >
           See all
         </button>
       </div>
 
-      <div className="mt-[18px] flex gap-[14px] overflow-x-auto px-[27px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="scrollbar-none mt-4 flex gap-3 overflow-x-auto px-4 sm:px-6 lg:px-8 [&::-webkit-scrollbar]:hidden">
         {groceries.map((grocery) => (
           <button
             key={grocery.name}
             type="button"
-            className={`flex h-[83px] w-[199px] shrink-0 items-center gap-[15px] rounded-[13px] px-[15px] ${grocery.className}`}
+            className={`flex h-20 w-48 shrink-0 items-center gap-4 rounded-xl px-4 ${grocery.className}`}
           >
             <img
               src={grocery.image}
               alt=""
-              className="h-[58px] w-[58px] object-contain"
+              className="h-14 w-14 object-contain"
             />
-            <span className="text-[16px] leading-none font-semibold text-[#3e423f]">
+            <span className="text-base font-semibold leading-none text-slate-700">
               {grocery.name}
             </span>
           </button>
         ))}
       </div>
 
-      <div className="mt-[16px] flex gap-[13px] overflow-x-auto px-[27px] pb-[2px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <ul className="scrollbar-none mt-4 flex gap-3 overflow-x-auto px-4 pb-0.5 sm:px-6 lg:px-8 [&::-webkit-scrollbar]:hidden">
         {groceryProducts.map((product) => (
-          <ProductCard key={product.name} product={product} />
+          <li key={product.name}>
+            <ProductCard product={product} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 };
 
 const HomeScreen = () => {
   return (
-    <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto min-h-screen w-full  overflow-hidden bg-white pb-[100px] pt-4">
-        <div className="md:flex w-full items-center">
-          <header className="pt-[20px] text-center md:w-[20%]">
+    <main className="min-h-screen w-full bg-white font-sans text-slate-900">
+      <section className="mx-auto min-h-screen w-full overflow-hidden bg-white pb-24 pt-4">
+        <div className="w-full md:flex md:items-center">
+          <header className="pt-5 text-center md:w-1/5 md:pt-0">
             <img
               src={CarrotLogo}
               alt="Nectar"
-              className="mx-auto h-[26px] w-[26px]"
+              className="mx-auto h-6.5 w-6.5"
             />
-            <div className="mt-[7px] flex items-center justify-center gap-[6px]">
-              <img src={LocationIcon} alt="" className="h-[16px] w-[12px]" />
-              <p className="text-[14px] md:text-[12px] leading-none font-semibold text-[#4c4f4d]">
+            <div className="mt-2 flex items-center justify-center gap-1.5">
+              <img src={LocationIcon} alt="" className="h-4 w-3" />
+              <p className="text-sm font-semibold leading-none text-slate-600 md:text-xs">
                 Dhaka, Banassre
               </p>
             </div>
           </header>
 
-          <div className="mt-[20px] px-[27px] md:w-[80%]">
+          <div className="mt-5 px-4 sm:px-6 md:mt-0 md:w-4/5 md:px-8">
             <SearchBar />
           </div>
         </div>
 
-        <div className="mt-[17px] px-[27px]">
+        <div className="mt-4 px-4 sm:px-6 lg:px-8">
           <img
             src={BannerImage}
             alt="Fresh vegetables, get up to 40% off"
-            className="h-auto w-full rounded-[8px]"
+            className="h-auto w-full rounded-lg"
           />
         </div>
 

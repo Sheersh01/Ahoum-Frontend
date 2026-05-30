@@ -50,19 +50,17 @@ const categories = [
 const Explores = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="mx-auto w-full  pb-[100px]">
-        <header className="pt-[20px] text-center">
-          <h1 className="text-[20px] leading-[24px] font-semibold">
-            Find Products
-          </h1>
+      <section className="mx-auto w-full pb-24">
+        <header className="pt-5 text-center">
+          <h1 className="text-xl leading-6 font-semibold">Find Products</h1>
         </header>
 
-        <div className="mt-[20px] px-[20px]">
+        <div className="mt-5 px-5 md:px-8">
           <SearchBar />
         </div>
 
-        <div className="mt-[20px] px-[16px] pb-[40px]">
-          <div className="grid grid-cols-2 gap-[14px]">
+        <div className="mt-5 px-4 md:px-8 pb-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {categories.map((cat) => {
               const slug = cat.name
                 .toLowerCase()
@@ -73,17 +71,17 @@ const Explores = () => {
                 <Link
                   key={cat.name}
                   to={`/products/${slug}`}
-                  className={`flex h-[140px] flex-col items-center justify-center gap-[8px] rounded-xl border px-[12px] py-[14px] ${cat.bg} ${cat.border}`}
+                  className={`flex h-36 flex-col items-center justify-center gap-2 rounded-xl border px-3 py-4 ${cat.bg} ${cat.border}`}
                   aria-label={cat.name}
                 >
-                  <div className="flex h-[68px] w-[68px] items-center justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center">
                     <img
                       src={cat.image}
                       alt=""
-                      className="h-[58px] w-[58px] object-contain"
+                      className="h-14 w-14 object-contain"
                     />
                   </div>
-                  <span className="mt-[6px] text-[14px] leading-none font-semibold text-center">
+                  <span className="mt-1 text-sm font-semibold text-center">
                     {cat.name}
                   </span>
                 </Link>

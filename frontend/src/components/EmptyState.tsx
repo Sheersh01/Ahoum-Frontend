@@ -4,7 +4,7 @@ type EmptyStateProps = {
 
 const EmptyState = ({ message }: EmptyStateProps) => {
   return (
-    <div className="flex items-center justify-center border-[#e8e8e8] px-6 text-center text-[14px] text-[#7c7c7c]">
+    <div className="flex min-h-36 items-center justify-center px-6 py-10 text-center text-sm leading-6 text-slate-500">
       {message}
     </div>
   );

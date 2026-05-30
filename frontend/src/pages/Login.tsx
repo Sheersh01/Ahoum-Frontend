@@ -32,28 +32,26 @@ const Login = () => {
   };
 
   return (
-    <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
-      <section className="relative mx-auto min-h-screen w-full overflow-hidden">
-        <div className="relative flex justify-center pt-20">
-          <img src={CarrotIcon} alt="Nectar" className="w-12" />
+    <main className="min-h-screen w-full bg-white font-sans text-slate-900">
+      <section className="relative mx-auto flex min-h-screen w-full flex-col overflow-hidden px-6 pb-4 pt-20 sm:px-8">
+        <div className="flex justify-center">
+          <img src={CarrotIcon} alt="Nectar" className="w-12 sm:w-14" />
         </div>
 
-        <form
-          noValidate
-          onSubmit={handleSubmit}
-          className="relative px-[26px] pt-[67px]"
-        >
-          <h1 className="text-[18px] leading-[22px] font-semibold tracking-normal">
-            Loging
-          </h1>
-          <p className="mt-[9px] text-[11px] leading-[14px] font-medium text-[#7c7c7c]">
-            Enter your emails and password
-          </p>
+        <form noValidate onSubmit={handleSubmit} className="pt-16 sm:pt-20">
+          <header>
+            <h1 className="text-lg font-semibold leading-6 tracking-normal sm:text-xl">
+              Loging
+            </h1>
+            <p className="mt-2 text-xs font-medium leading-4 text-slate-500 sm:text-sm sm:leading-5">
+              Enter your emails and password
+            </p>
+          </header>
 
-          <div className="mt-[31px]">
+          <div className="mt-8">
             <label
               htmlFor="email"
-              className="block text-[11px] leading-[13px] font-medium text-[#7c7c7c]"
+              className="block text-xs font-medium leading-4 text-slate-500"
             >
               Email
             </label>
@@ -68,27 +66,27 @@ const Login = () => {
               required
               aria-invalid={Boolean(errors.email)}
               aria-describedby={errors.email ? "login-email-error" : undefined}
-              className="mt-[13px] h-[18px] w-full border-0 bg-transparent p-0 text-[12px] leading-[18px] font-medium text-[#181725] outline-none"
+              className="mt-3 h-5 w-full border-0 bg-transparent p-0 text-sm font-medium leading-5 text-slate-900 outline-none"
             />
-            <div className="mt-[11px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
             {errors.email && (
               <p
                 id="login-email-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-2 text-xs font-medium leading-4 text-red-500"
               >
                 {errors.email}
               </p>
             )}
           </div>
 
-          <div className="mt-[25px]">
+          <div className="mt-6">
             <label
               htmlFor="password"
-              className="block text-[11px] leading-[13px] font-medium text-[#7c7c7c]"
+              className="block text-xs font-medium leading-4 text-slate-500"
             >
               Password
             </label>
-            <div className="mt-[14px] flex h-[18px] items-center">
+            <div className="mt-3 flex h-5 items-center gap-3">
               <input
                 id="password"
                 type={isPasswordVisible ? "text" : "password"}
@@ -102,7 +100,7 @@ const Login = () => {
                 aria-describedby={
                   errors.password ? "login-password-error" : undefined
                 }
-                className="h-[18px] min-w-0 flex-1 border-0 bg-transparent p-0 text-[20px] leading-none tracking-[4px] text-[#181725] outline-none"
+                className="h-5 min-w-0 flex-1 border-0 bg-transparent p-0 text-xl leading-none tracking-[0.25rem] text-slate-900 outline-none"
               />
               <button
                 type="button"
@@ -110,26 +108,26 @@ const Login = () => {
                   isPasswordVisible ? "Hide password" : "Show password"
                 }
                 onClick={() => setIsPasswordVisible((value) => !value)}
-                className="flex h-[18px] w-[18px] items-center justify-center"
+                className="flex h-5 w-5 items-center justify-center"
               >
-                <img src={HideEyeIcon} alt="" className="h-[13px] w-[15px]" />
+                <img src={HideEyeIcon} alt="" className="h-3.5 w-4" />
               </button>
             </div>
-            <div className="mt-[11px] h-px w-full bg-[#e2e2e2]" />
+            <div className="mt-2 h-px w-full bg-slate-200" />
             {errors.password && (
               <p
                 id="login-password-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
+                className="mt-2 text-xs font-medium leading-4 text-red-500"
               >
                 {errors.password}
               </p>
             )}
           </div>
 
-          <div className="mt-[11px] text-right">
+          <div className="mt-3 text-right">
             <button
               type="button"
-              className="text-[10px] leading-[12px] font-medium text-[#181725]"
+              className="text-xs font-medium leading-4 text-slate-900"
             >
               Forgot Password?
             </button>
@@ -137,20 +135,20 @@ const Login = () => {
 
           <button
             type="submit"
-            className="mt-[20px] flex h-[46px] w-full items-center justify-center rounded-xl bg-[#53b175] text-[13px] leading-none font-semibold text-white"
+            className="mt-5 flex h-12 w-full items-center justify-center rounded-xl bg-[#53B175] text-sm font-semibold leading-none text-white"
           >
             Log In
           </button>
 
-          <p className="mt-[17px] text-center text-[12px] leading-[12px] font-semibold text-[#181725]">
+          <p className="mt-4 text-center text-xs font-semibold leading-4 text-slate-900">
             Don&apos;t have an account?{" "}
-            <Link to="/signup" className="font-semibold text-[#53b175]">
+            <Link to="/signup" className="font-semibold text-brand">
               Signup
             </Link>
           </p>
         </form>
 
-        <div className="absolute bottom-[7px] left-1/2 h-[4px] w-[93px] -translate-x-1/2 rounded-full bg-[#c8d1d2]" />
+        <div className="absolute bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-[#c8d1d2]" />
       </section>
     </main>
   );

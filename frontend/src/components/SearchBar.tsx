@@ -12,16 +12,20 @@ const SearchBar = ({
   placeholder = "Search Store",
 }: SearchBarProps) => {
   return (
-    <label className="flex h-[41px] w-full items-center gap-[12px] rounded-[11px] bg-[#f2f3f2] px-[12px]">
-      <img src={SearchIcon} alt="" className="h-[15px] w-[15px] shrink-0" />
+    <div className="flex h-10 w-full items-center gap-3 rounded-xl bg-[#f2f3f2] px-3 sm:h-11 sm:px-4">
+      <label htmlFor="store-search" className="sr-only">
+        Search store
+      </label>
+      <img src={SearchIcon} alt="" className="h-4 w-4 shrink-0" />
       <input
+        id="store-search"
         type="search"
         value={value}
         onChange={(event) => onChange?.(event.target.value)}
         placeholder={placeholder}
-        className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-[12px] leading-none font-medium text-[#181725] outline-none placeholder:text-[#7c7c7c]"
+        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm font-medium leading-5 text-[#181725] outline-none placeholder:text-[#7c7c7c]"
       />
-    </label>
+    </div>
   );
 };
 

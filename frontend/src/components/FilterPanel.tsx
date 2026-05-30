@@ -20,23 +20,29 @@ const FilterPanel = ({
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex bg-black/40">
-      <div className="h-full w-full bg-white p-6">
+    <div className="fixed inset-0 z-50 flex items-end bg-black/40 sm:items-center">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="filters-title"
+        className="h-full w-full bg-white p-6 sm:max-w-md sm:mx-auto sm:rounded-lg sm:p-8"
+      >
         <div className="mb-4 flex items-center justify-between">
           <button
             type="button"
             onClick={onClose}
             aria-label="Close filters"
-            className="text-[18px] font-semibold"
+            className="text-lg font-semibold"
+            autoFocus
           >
             ×
           </button>
-          <h2 className="text-[16px] font-semibold">Filters</h2>
+          <h2 className="text-base font-semibold">Filters</h2>
           <div style={{ width: 24 }} />
         </div>
 
         <div className="mt-2 rounded-xl bg-[#f7f7f7] p-4">
-          <h3 className="text-[14px] font-semibold">Categories</h3>
+          <h3 className="text-sm font-semibold">Categories</h3>
           <div className="mt-3 space-y-3">
             {["Eggs", "Noodles & Pasta", "Chips & Crisps", "Fast Food"].map(
               (c) => (
@@ -47,7 +53,7 @@ const FilterPanel = ({
                     onChange={() => toggleCategory(c)}
                     className="h-4 w-4"
                   />
-                  <span className="text-[13px]">{c}</span>
+                  <span className="text-sm">{c}</span>
                 </label>
               ),
             )}
@@ -55,7 +61,7 @@ const FilterPanel = ({
         </div>
 
         <div className="mt-6">
-          <h3 className="text-[14px] font-semibold">Brand</h3>
+          <h3 className="text-sm font-semibold">Brand</h3>
           <div className="mt-3 space-y-3">
             {["Individual Collection", "Cocola", "Ifad", "Kazi Farmas"].map(
               (b) => (
@@ -66,18 +72,18 @@ const FilterPanel = ({
                     onChange={() => toggleBrand(b)}
                     className="h-4 w-4"
                   />
-                  <span className="text-[13px]">{b}</span>
+                  <span className="text-sm">{b}</span>
                 </label>
               ),
             )}
           </div>
         </div>
 
-        <div className="absolute bottom-6 left-6 right-6">
+        <div className="absolute inset-x-6 bottom-6">
           <button
             type="button"
             onClick={onApply}
-            className="w-full rounded-[10px] bg-[#53b175] py-3 text-white font-semibold"
+            className="w-full rounded-lg bg-[#53B175] py-3 text-white font-semibold"
           >
             Apply Filter
           </button>
