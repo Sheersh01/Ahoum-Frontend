@@ -9,7 +9,10 @@ import {
   FaGoogle,
   FaCrosshairs,
 } from "react-icons/fa";
-
+import icon from "../../assets/carrotColored.png";
+import facebook from "../../assets/facebook.png";
+import google from "../../assets/google.png";
+// import HideEyeIcon from "../assets/HideEye.png";
 const DesktopHome = () => {
   const navigate = useNavigate();
 
@@ -76,13 +79,15 @@ const DesktopHome = () => {
 
   return (
     <div className="min-h-screen p-6">
-      <div className="max-w-7xl mx-auto bg-white rounded-3xl overflow-hidden shadow-lg">
+      <div className="max-w-7xl mx-auto bg-white rounded-3xl overflow-hidden ">
         <div className="grid lg:grid-cols-2 min-h-[850px]">
           {/* LEFT */}
           <div className="relative p-16 flex flex-col justify-center">
             <div className="absolute top-10 left-10">
               <div className="flex items-center gap-3">
-                <div className="text-4xl">🥕</div>
+                <div className="text-4xl">
+                  <img src={icon} alt="Nectar Logo" />
+                </div>
                 <div>
                   <h1 className="font-bold text-3xl text-green-600">nectar</h1>
                   <p className="text-xs tracking-widest text-gray-500">
@@ -207,13 +212,33 @@ const DesktopHome = () => {
                   </span>
                 </div>
 
-                <button
-                  onClick={() => setStep("otp")}
-                  className="w-full h-11 border border-gray-200 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
-                >
-                  <FaGoogle size={14} />
-                  Continue with Google
-                </button>
+                <div className="mt-6 space-y-3.5">
+                  <button
+                    type="button"
+                    onClick={() => navigate("/login")}
+                    className="relative flex h-12 w-full items-center justify-center rounded-xl bg-[#5383ec] text-sm font-semibold leading-none text-white"
+                  >
+                    <img
+                      src={google}
+                      alt=""
+                      className="absolute left-6 h-4.5 w-4.5"
+                    />
+                    Continue with Google
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => navigate("/login")}
+                    className="relative flex h-12 w-full items-center justify-center rounded-xl bg-[#4a66ac] text-sm font-semibold leading-none text-white"
+                  >
+                    <img
+                      src={facebook}
+                      alt=""
+                      className="absolute left-7 h-4.5 w-4.5"
+                    />
+                    Continue with Facebook
+                  </button>
+                </div>
 
                 <p className="text-center text-xs text-gray-400 mt-5">
                   {authMode === "login"
