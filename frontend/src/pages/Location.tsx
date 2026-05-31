@@ -1,9 +1,8 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import BackArrow from "../assets/back arrow.png";
-import DropDownArrow from "../assets/DropDownArrow.png";
 import MapImage from "../assets/Map.png";
+import { IoIosArrowBack, IoIosArrowDown } from "react-icons/io";
 
 const Location = () => {
   const navigate = useNavigate();
@@ -35,7 +34,7 @@ const Location = () => {
           onClick={() => navigate("/verification")}
           className="flex h-9 w-9 items-center justify-center rounded-full bg-transparent"
         >
-          <img src={BackArrow} alt="" className="w-2.5" />
+          <IoIosArrowBack aria-hidden="true" className="h-5 w-5" />
         </button>
 
         <div className="mt-8 flex justify-center">
@@ -80,9 +79,8 @@ const Location = () => {
                 <option value="Dhanmondi">Dhanmondi</option>
                 <option value="Uttara">Uttara</option>
               </select>
-              <img
-                src={DropDownArrow}
-                alt=""
+              <IoIosArrowDown
+                aria-hidden="true"
                 className="pointer-events-none absolute right-0 h-1.5 w-2"
               />
             </div>
@@ -116,9 +114,8 @@ const Location = () => {
                 <option value="Block B">Block B</option>
                 <option value="Block C">Block C</option>
               </select>
-              <img
-                src={DropDownArrow}
-                alt=""
+              <IoIosArrowDown
+                aria-hidden="true"
                 className="pointer-events-none absolute right-0 h-1.5 w-2"
               />
             </div>

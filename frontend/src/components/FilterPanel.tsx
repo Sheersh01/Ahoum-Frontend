@@ -44,38 +44,46 @@ const FilterPanel = ({
         <div className="mt-2 rounded-xl bg-[#f7f7f7] p-4">
           <h3 className="text-sm font-semibold">Categories</h3>
           <div className="mt-3 space-y-3">
-            {["Eggs", "Noodles & Pasta", "Chips & Crisps", "Fast Food"].map(
-              (c) => (
-                <label key={c} className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    checked={selectedCategories.includes(c)}
-                    onChange={() => toggleCategory(c)}
-                    className="h-4 w-4"
-                  />
-                  <span className="text-sm">{c}</span>
-                </label>
-              ),
-            )}
+            {["Paan Corner", "Beverages"].map((c) => (
+              <label key={c} className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(c)}
+                  onChange={() => toggleCategory(c)}
+                  className="h-4 w-4"
+                />
+                <span className="text-sm">{c}</span>
+              </label>
+            ))}
           </div>
         </div>
 
         <div className="mt-6">
           <h3 className="text-sm font-semibold">Brand</h3>
           <div className="mt-3 space-y-3">
-            {["Individual Collection", "Cocola", "Ifad", "Kazi Farmas"].map(
-              (b) => (
-                <label key={b} className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    checked={selectedBrands.includes(b)}
-                    onChange={() => toggleBrand(b)}
-                    className="h-4 w-4"
-                  />
-                  <span className="text-sm">{b}</span>
-                </label>
-              ),
-            )}
+            {[
+              "Bongchie",
+              "RAW",
+              "Mozo",
+              "Nicofree",
+              "LIT",
+              "Stash Pro",
+              "Generic",
+              "Individual Collection",
+              "Cocola",
+              "Ifad",
+              "Kazi Farmas",
+            ].map((b) => (
+              <label key={b} className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={selectedBrands.includes(b)}
+                  onChange={() => toggleBrand(b)}
+                  className="h-4 w-4"
+                />
+                <span className="text-sm">{b}</span>
+              </label>
+            ))}
           </div>
         </div>
 

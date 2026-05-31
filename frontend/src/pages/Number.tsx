@@ -1,9 +1,8 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import BackArrow from "../assets/back arrow.png";
 import FlagIcon from "../assets/Flag.png";
-import FrontArrow from "../assets/Front-Arrow.png";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Number = () => {
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ const Number = () => {
           onClick={() => navigate("/signin")}
           className="relative ml-[19px] pt-8 mt-[10px] flex h-[14px] w-[14px] items-center justify-center"
         >
-          <img src={BackArrow} alt="" className="w-[10px]" />
+          <IoIosArrowBack aria-hidden="true" className="h-4 w-4" />
         </button>
 
         <div className="relative px-[20px] pt-[38px]">
@@ -89,7 +88,7 @@ const Number = () => {
           aria-label="Continue"
           className="absolute right-[20px] bottom-[14px] flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#53b175]"
         >
-          <img src={FrontArrow} alt="" className="h-[12px] w-[7px]" />
+          <IoIosArrowForward aria-hidden="true" className="h-[12px] w-[7px]" />
         </button>
       </form>
     </main>

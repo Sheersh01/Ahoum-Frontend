@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import FrontArrow from "../assets/Front-Arrow.png";
+import { IoIosArrowForward } from "react-icons/io";
 
 type CheckOutProps = {
   visible: boolean;
@@ -112,12 +112,7 @@ const CheckOut = ({
 
               <div className="flex items-center gap-3">
                 {content}
-                <img
-                  src={FrontArrow}
-                  alt=""
-                  aria-hidden="true"
-                  className="h-4 w-4"
-                />
+                <IoIosArrowForward aria-hidden="true" className="h-4 w-4" />
               </div>
             </div>
           ))}

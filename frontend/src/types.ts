@@ -6,6 +6,7 @@ export type OrderStatus =
   | "cancelled";
 
 export type ProductCategory =
+  | "Paan Corner"
   | "Eggs"
   | "Noodles & Pasta"
   | "Chips & Crisps"

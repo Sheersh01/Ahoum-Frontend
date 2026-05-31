@@ -1,30 +1,31 @@
 import { NavLink } from "react-router";
-import CartIcon from "../assets/cart.png";
-import ExploreIcon from "../assets/explore.png";
-import FavouriteIcon from "../assets/favourite.png";
 import ProfileIcon from "../assets/profile.png";
-import StoreIcon from "../assets/store.png";
+import { RiMenuSearchLine } from "react-icons/ri";
+import { CiShop } from "react-icons/ci";
+import { FaRegHeart } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
+import { useCartStore } from "../store/cartStore";
 
 const navItems = [
   {
     label: "Shop",
     to: "/home",
-    icon: StoreIcon,
+    icon: "shop",
   },
   {
     label: "Explore",
     to: "/explore",
-    icon: ExploreIcon,
+    icon: "explore",
   },
   {
     label: "Cart",
     to: "/cart",
-    icon: CartIcon,
+    icon: "cart",
   },
   {
     label: "Favourite",
     to: "/favourite",
-    icon: FavouriteIcon,
+    icon: "heart",
   },
   {
     label: "Account",
@@ -34,6 +35,10 @@ const navItems = [
 ];
 
 const StickyFooter = () => {
+  const cartCount = useCartStore((state) =>
+    state.items.reduce((total, item) => total + item.qty, 0),
+  );
+
   return (
     <footer className="fixed inset-x-0 bottom-0 z-50 lg:hidden">
       <nav
@@ -46,16 +51,31 @@ const StickyFooter = () => {
               <NavLink
                 to={item.to}
                 className={({ isActive }) =>
-                  `flex min-w-11 flex-col items-center gap-2 text-xs font-semibold leading-none ${
-                    isActive ? "text-brand" : "text-slate-900"
-                  }`
+                  `flex min-w-11 flex-col items-center gap-2 text-xs font-semibold leading-none ${isActive ? "text-[#53B175]" : "text-slate-900"}`
                 }
               >
-                <img
-                  src={item.icon}
-                  alt=""
-                  className="h-6 w-6 object-contain"
-                />
+                {item.icon === "heart" ? (
+                  <FaRegHeart className="h-6 w-6" aria-hidden="true" />
+                ) : item.icon === "cart" ? (
+                  <span className="relative inline-flex">
+                    <IoCartOutline aria-hidden="true" className="h-6 w-6" />
+                    {cartCount > 0 ? (
+                      <span className="absolute -bottom-1 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#53B175] px-1 text-[10px] font-semibold leading-none text-white">
+                        {cartCount > 99 ? "99+" : cartCount}
+                      </span>
+                    ) : null}
+                  </span>
+                ) : item.icon === "shop" ? (
+                  <CiShop className="h-6 w-6" aria-hidden="true" />
+                ) : item.icon === "explore" ? (
+                  <RiMenuSearchLine className="h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <img
+                    src={item.icon}
+                    alt=""
+                    className="h-6 w-6 object-contain"
+                  />
+                )}
                 <span>{item.label}</span>
               </NavLink>
             </li>

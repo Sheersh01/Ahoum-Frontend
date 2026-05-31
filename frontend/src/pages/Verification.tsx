@@ -1,8 +1,7 @@
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import BackArrow from "../assets/back arrow.png";
-import FrontArrow from "../assets/Front-Arrow.png";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Verification = () => {
   const navigate = useNavigate();
@@ -32,14 +31,13 @@ const Verification = () => {
         onSubmit={handleSubmit}
         className="relative mx-auto min-h-screen w-full  overflow-hidden"
       >
-
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate("/number")}
           className="relative ml-[24px] mt-[14px] pt-8 flex h-[14px] w-[14px] items-center justify-center"
         >
-          <img src={BackArrow} alt="" className="w-[10px]" />
+          <IoIosArrowBack aria-hidden="true" className="h-4 w-4" />
         </button>
 
         <div className="relative px-[25px] pt-[35px]">
@@ -95,7 +93,7 @@ const Verification = () => {
           aria-label="Continue"
           className="absolute right-[15px] bottom-[12px] flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#53b175]"
         >
-          <img src={FrontArrow} alt="" className="h-[12px] w-[7px]" />
+          <IoIosArrowForward aria-hidden="true" className="h-[12px] w-[7px]" />
         </button>
       </form>
     </main>

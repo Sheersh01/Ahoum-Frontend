@@ -1,4 +1,4 @@
-import SearchIcon from "../assets/Search.png";
+import { IoSearchOutline } from "react-icons/io5";
 
 type SearchBarProps = {
   value?: string;
@@ -16,7 +16,7 @@ const SearchBar = ({
       <label htmlFor="store-search" className="sr-only">
         Search store
       </label>
-      <img src={SearchIcon} alt="" className="h-4 w-4 shrink-0" />
+      <IoSearchOutline aria-hidden="true" className="h-4 w-4 shrink-0" />
       <input
         id="store-search"
         type="search"

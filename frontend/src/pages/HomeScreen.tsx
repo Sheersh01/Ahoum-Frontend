@@ -1,17 +1,16 @@
 import { Link } from "react-router";
-import SearchBar from "../components/SearchBar";
 import AppleImage from "../assets/apple.png";
 import BannerImage from "../assets/Banner.png";
-import CarrotLogo from "../assets/carrotColored.png";
-import LocationIcon from "../assets/locationIcon.png";
 import PlusIcon from "../assets/Plus.png";
 import StickyFooter from "../components/StickyFooter";
-import VegetablesImage from "../assets/categories/vegetables.png";
-import BakeryImage from "../assets/categories/bakery.png";
-import EggsImage from "../assets/categories/eggs.png";
-import MeatImage from "../assets/categories/meat.png";
-import OilImage from "../assets/categories/oil.png";
+import VegetablesImage from "../assets/categories/fruits-vegetables.png";
+import BakeryImage from "../assets/categories/bakery-biscuits.png";
+import EggsImage from "../assets/categories/dairy-bread-eggs.png";
+import MeatImage from "../assets/categories/chicken-meat-fish.png";
+import OilImage from "../assets/categories/masala-oil-more.png";
 import { useCartStore } from "../store/cartStore";
+import HomeNav from "../components/HomeNav";
+import CategoryTabs from "../components/CategoryTabs";
 
 type Product = {
   id: string;
@@ -239,26 +238,8 @@ const GroceriesSection = () => {
 const HomeScreen = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-slate-900">
-      <section className="mx-auto min-h-screen w-full overflow-hidden bg-white pb-24 pt-4">
-        <div className="w-full md:flex md:items-center">
-          <header className="pt-5 text-center md:w-1/5 md:pt-0">
-            <img
-              src={CarrotLogo}
-              alt="Nectar"
-              className="mx-auto h-6.5 w-6.5"
-            />
-            <div className="mt-2 flex items-center justify-center gap-1.5">
-              <img src={LocationIcon} alt="" className="h-4 w-3" />
-              <p className="text-sm font-semibold leading-none text-slate-600 md:text-xs">
-                Dhaka, Banassre
-              </p>
-            </div>
-          </header>
-
-          <div className="mt-5 px-4 sm:px-6 md:mt-0 md:w-4/5 md:px-8">
-            <SearchBar />
-          </div>
-        </div>
+      <section className="mx-auto min-h-screen w-full overflow-hidden bg-white pb-24">
+        <HomeNav />
 
         <div className="mt-4 px-4 sm:px-6 lg:px-8">
           <img
@@ -267,7 +248,14 @@ const HomeScreen = () => {
             className="h-auto w-full rounded-lg"
           />
         </div>
-
+        <div className="hidden lg:block">
+          <h1 className="my-6 px-4 text-2xl font-semibold leading-6 text-slate-900 lg:px-8">
+            Explore
+            <div className="mt-4">
+              <CategoryTabs />
+            </div>
+          </h1>
+        </div>
         <ProductSection title="Exclusive Offer" products={exclusiveOffers} />
         <ProductSection title="Best Selling" products={bestSelling} />
         <GroceriesSection />
