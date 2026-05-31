@@ -7,18 +7,9 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 const Number = () => {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState("+880 ");
-  const [error, setError] = useState("");
-
-  const isValidPhoneNumber = /^\+8801\d{9}$/.test(phoneNumber.trim());
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (!isValidPhoneNumber) {
-      setError("Enter a valid mobile number.");
-      return;
-    }
-
     navigate("/verification");
   };
 
@@ -27,13 +18,13 @@ const Number = () => {
       <form
         noValidate
         onSubmit={handleSubmit}
-        className="relative mx-auto min-h-screen w-full  overflow-hidden"
+        className="relative mx-auto min-h-screen w-full overflow-hidden"
       >
         <button
           type="button"
           aria-label="Go back"
           onClick={() => navigate("/signin")}
-          className="relative ml-[19px] pt-8 mt-[10px] flex h-[14px] w-[14px] items-center justify-center"
+          className="relative ml-[19px] mt-[10px] flex h-[14px] w-[14px] items-center justify-center pt-8"
         >
           <IoIosArrowBack aria-hidden="true" className="h-4 w-4" />
         </button>
@@ -50,36 +41,25 @@ const Number = () => {
             >
               Mobile Number
             </label>
+
             <div className="mt-[11px] flex h-[18px] items-center gap-[11px]">
               <img
                 src={FlagIcon}
                 alt="Bangladesh"
                 className="h-[20px] w-[25px] shrink-0"
               />
+
               <input
                 id="mobile-number"
                 type="tel"
                 inputMode="tel"
                 value={phoneNumber}
-                onChange={(event) => {
-                  setPhoneNumber(event.target.value);
-                  setError("");
-                }}
-                required
-                aria-invalid={Boolean(error)}
-                aria-describedby={error ? "mobile-number-error" : undefined}
+                onChange={(event) => setPhoneNumber(event.target.value)}
                 className="h-[18px] min-w-0 flex-1 border-0 bg-transparent p-0 text-[12px] leading-[18px] font-medium text-[#181725] outline-none"
               />
             </div>
+
             <div className="mt-[13px] h-px w-full bg-[#e2e2e2]" />
-            {error && (
-              <p
-                id="mobile-number-error"
-                className="mt-[7px] text-[10px] leading-[12px] font-medium text-red-500"
-              >
-                {error}
-              </p>
-            )}
           </div>
         </div>
 
