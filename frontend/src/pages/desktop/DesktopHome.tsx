@@ -6,7 +6,6 @@ import {
   FaEye,
   FaEyeSlash,
   FaTimes,
-  FaGoogle,
   FaCrosshairs,
 } from "react-icons/fa";
 import icon from "../../assets/carrotColored.png";
