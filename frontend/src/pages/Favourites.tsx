@@ -6,6 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useFavoritesStore, type FavoriteItem } from "../store/favoritesStore";
 import { useCartStore } from "../store/cartStore";
 import HomeNav from "../components/HomeNav";
+import Footer from "../components/Footer";
 
 const parsePrice = (priceStr: string) => {
   const num = priceStr.replace(/[^0-9.]/g, "");
@@ -267,6 +268,7 @@ const Favourites = () => {
       </section>
 
       <StickyFooter />
+      <Footer />
     </main>
   );
 };

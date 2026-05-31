@@ -24,7 +24,10 @@ const App = () => {
       />
 
       {isDesktop ? (
-        <DesktopRoutes />
+         <div className="max-w-7xl mx-auto min-h-screen">
+           <DesktopRoutes />
+         </div>
+          
       ) : (
         <div className="max-w-7xl mx-auto min-h-screen">
           <MobileRoutes />

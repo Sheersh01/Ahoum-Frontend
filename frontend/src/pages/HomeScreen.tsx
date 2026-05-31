@@ -11,6 +11,7 @@ import OilImage from "../assets/categories/masala-oil-more.png";
 import { useCartStore } from "../store/cartStore";
 import HomeNav from "../components/HomeNav";
 import CategoryTabs from "../components/CategoryTabs";
+import Footer from "../components/Footer";
 
 type Product = {
   id: string;
@@ -261,6 +262,7 @@ const HomeScreen = () => {
         <GroceriesSection />
       </section>
       <StickyFooter />
+      <Footer />
     </main>
   );
 };

@@ -14,6 +14,7 @@ import PlusIcon from "../assets/Plus.png";
 import { useCartStore } from "../store/cartStore";
 import type { CartItem } from "../types";
 import HomeNav from "../components/HomeNav";
+import Footer from "../components/Footer";
 
 const formatCurrency = (value: number) => `₹${value.toFixed(2)}`;
 
@@ -138,7 +139,6 @@ const MyCart = () => {
       </div>
 
       <section className="mx-auto w-full max-w-[1440px] px-4 pb-36 pt-4 sm:px-6 lg:px-8 lg:pb-10 lg:pt-4">
-       
         <header className="mb-4 px-4 sm:px-6 lg:px-8 border-b border-slate-200">
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-center sm:text-left  pb-3">
@@ -320,6 +320,7 @@ const MyCart = () => {
       />
 
       <StickyFooter />
+      <Footer />
     </main>
   );
 };

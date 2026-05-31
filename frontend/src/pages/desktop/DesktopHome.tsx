@@ -109,109 +109,114 @@ const DesktopHome = () => {
             />
           </div>
 
-          {/* RIGHT */}
-          <div className="bg-[#FCFCFC] flex items-center justify-center">
-            <div className="w-full max-w-md bg-white rounded-2xl border shadow-sm">
-              {/* TABS */}
-              <div className="grid grid-cols-2 border-b">
-                <button
-                  onClick={() => setAuthMode("login")}
-                  className={`py-4 font-semibold transition ${
-                    authMode === "login"
-                      ? "border-b-2 border-green-500 text-black"
-                      : "text-gray-400"
-                  }`}
-                >
-                  Login
-                </button>
-
-                <button
-                  onClick={() => setAuthMode("signup")}
-                  className={`py-4 font-semibold transition ${
-                    authMode === "signup"
-                      ? "border-b-2 border-green-500 text-black"
-                      : "text-gray-400"
-                  }`}
-                >
-                  Sign Up
-                </button>
+          {/* ── RIGHT ── */}
+          <div className="bg-[#F8FAF6] flex items-center justify-center p-10">
+            <div className="w-full max-w-[380px] bg-white rounded-2xl border border-gray-100 shadow-sm">
+              {/* Tabs */}
+              <div className="grid grid-cols-2 border-b border-gray-100">
+                {(["login", "signup"] as const).map((t) => (
+                  <button
+                    key={t}
+                    onClick={() => setAuthMode(t)}
+                    className={`py-4 text-sm font-semibold transition capitalize ${
+                      authMode === t
+                        ? "border-b-2 border-green-500 text-gray-900"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    {t === "login" ? "Login" : "Sign Up"}
+                  </button>
+                ))}
               </div>
 
               <div className="p-8">
-                <h2 className="text-2xl font-bold">
-                  {authMode === "login" ? "Welcome Back!" : "Create Account"}
+                <h2 className="text-xl font-bold text-gray-900">
+                  {authMode === "login" ? "Welcome back!" : "Create Account"}
                 </h2>
-
-                <p className="text-gray-500 mt-2">
+                <p className="text-sm text-gray-400 mt-1">
                   {authMode === "login"
                     ? "Login to continue"
                     : "Sign up to start shopping"}
                 </p>
 
-                <div className="space-y-5 mt-8">
+                <div className="space-y-4 mt-6">
                   <div>
-                    <label className="text-sm font-medium">Email / Phone</label>
-
+                    <label className="text-xs font-semibold text-gray-600 block mb-1.5">
+                      Email or Phone number
+                    </label>
                     <input
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full mt-2 h-12 border rounded-lg px-4"
-                      placeholder="Enter email or phone"
+                      className="w-full h-11 border border-gray-200 rounded-xl px-4 text-sm focus:outline-none focus:border-green-400"
+                      placeholder="Enter your email or phone number"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium">Password</label>
-
+                    <label className="text-xs font-semibold text-gray-600 block mb-1.5">
+                      Password
+                    </label>
                     <div className="relative">
                       <input
                         type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full mt-2 h-12 border rounded-lg px-4"
-                        placeholder="Enter password"
+                        className="w-full h-11 border border-gray-200 rounded-xl px-4 pr-10 text-sm focus:outline-none focus:border-green-400"
+                        placeholder="Enter your password"
                       />
-
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-5"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
                       >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        {showPassword ? (
+                          <FaEyeSlash size={14} />
+                        ) : (
+                          <FaEye size={14} />
+                        )}
                       </button>
+                    </div>
+                    <div className="text-right mt-1">
+                      <span className="text-xs text-green-600 cursor-pointer">
+                        Forgot password?
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <button
                   onClick={handleAuth}
-                  className="w-full mt-8 h-12 rounded-lg bg-green-500 text-white font-semibold"
+                  className="w-full mt-6 h-11 rounded-xl bg-green-500 hover:bg-green-600 text-white font-bold text-sm transition"
                 >
                   {authMode === "login" ? "Login" : "Create Account"}
                 </button>
 
-                <div className="text-center text-gray-400 text-sm my-6">
-                  or continue with
+                <div className="relative text-center my-5">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-100" />
+                  </div>
+                  <span className="relative bg-white px-3 text-xs text-gray-400">
+                    or continue with
+                  </span>
                 </div>
 
                 <button
                   onClick={() => setStep("otp")}
-                  className="w-full h-12 border rounded-lg flex items-center justify-center gap-3"
+                  className="w-full h-11 border border-gray-200 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
                 >
-                  <FaGoogle />
-                  Google
+                  <FaGoogle size={14} />
+                  Continue with Google
                 </button>
 
-                <p className="text-center mt-6 text-sm">
+                <p className="text-center text-xs text-gray-400 mt-5">
                   {authMode === "login"
                     ? "Don't have an account?"
                     : "Already have an account?"}
-
                   <span
                     onClick={() =>
                       setAuthMode(authMode === "login" ? "signup" : "login")
                     }
-                    className="ml-2 text-green-600 cursor-pointer"
+                    className="ml-1 text-green-600 font-semibold cursor-pointer"
                   >
                     {authMode === "login" ? "Sign Up" : "Login"}
                   </span>
@@ -222,72 +227,96 @@ const DesktopHome = () => {
         </div>
       </div>
 
-      {/* OTP */}
+      {/* ── OTP MODAL ── */}
       {step === "otp" && (
         <Modal onClose={() => setStep("auth")}>
           <div className="text-center">
-            <FaPhoneAlt size={28} className="mx-auto text-green-500" />
+            <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
+              <FaPhoneAlt size={22} className="text-green-500" />
+            </div>
+            <h2 className="text-xl font-bold">Verify your number</h2>
+            <p className="text-sm text-gray-400 mt-1">
+              We've sent a 4-digit code to
+            </p>
+            <p className="font-bold text-gray-900 mt-1 mb-5">
+              +880 1700 123456
+            </p>
 
-            <h2 className="text-2xl font-semibold mt-4">Verify Your Number</h2>
-
-            <p className="text-gray-500 mt-2">Enter the 4 digit OTP</p>
-
-            <div className="flex justify-center gap-3 mt-8">
-              {otp.map((value, index) => (
+            <div className="flex justify-center gap-3">
+              {otp.map((val, i) => (
                 <input
-                  key={index}
-                  value={value}
-                  maxLength={1}
-                  onChange={(e) => {
-                    const copy = [...otp];
-                    copy[index] = e.target.value;
-                    setOtp(copy);
+                  key={i}
+                  ref={(el) => {
+                    otpRefs.current[i] = el;
                   }}
-                  className="w-14 h-14 border rounded-lg text-center text-xl"
+                  value={val}
+                  maxLength={1}
+                  onChange={(e) => handleOtpInput(i, e.target.value)}
+                  className="w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-xl font-bold focus:outline-none focus:border-green-400"
                 />
               ))}
             </div>
 
+            <p className="text-xs text-gray-400 mt-4">
+              Resend code in{" "}
+              <span className="text-green-600 font-semibold">{timerStr}</span>
+            </p>
+
             <button
               onClick={handleOtp}
-              className="w-full mt-8 h-12 rounded-lg bg-green-500 text-white"
+              className="w-full mt-6 h-11 rounded-xl bg-green-500 hover:bg-green-600 text-white font-bold text-sm transition"
             >
-              Verify & Continue
+              Verify &amp; Continue
             </button>
           </div>
         </Modal>
       )}
 
-      {/* LOCATION */}
+      {/* ── LOCATION MODAL ── */}
       {step === "location" && (
         <Modal onClose={() => setStep("otp")}>
           <div>
-            <FaMapMarkerAlt size={28} className="mx-auto text-green-500" />
-
-            <h2 className="text-center text-2xl font-semibold mt-4">
+            <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
+              <FaMapMarkerAlt size={22} className="text-green-500" />
+            </div>
+            <h2 className="text-xl font-bold text-center">
               Select Your Location
             </h2>
+            <p className="text-sm text-gray-400 text-center mt-1 mb-6">
+              Set your location to see products
+              <br />
+              and delivery time in your area
+            </p>
 
-            <div className="mt-8 space-y-5">
-              <select
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                className="w-full border h-12 rounded-lg px-4"
-              >
-                <option>Dhaka</option>
-                <option>Lucknow</option>
-                <option>Delhi</option>
-              </select>
-
-              <select
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                className="w-full border h-12 rounded-lg px-4"
-              >
-                <option>Banassre</option>
-                <option>Hazratganj</option>
-                <option>Gomti Nagar</option>
-              </select>
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs font-semibold text-gray-600 block mb-1.5">
+                  City
+                </label>
+                <select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full h-11 border border-gray-200 rounded-xl px-4 text-sm appearance-none focus:outline-none focus:border-green-400 bg-white"
+                >
+                  <option>Dhaka</option>
+                  <option>Lucknow</option>
+                  <option>Delhi</option>
+                </select>
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-gray-600 block mb-1.5">
+                  Area
+                </label>
+                <select
+                  value={area}
+                  onChange={(e) => setArea(e.target.value)}
+                  className="w-full h-11 border border-gray-200 rounded-xl px-4 text-sm appearance-none focus:outline-none focus:border-green-400 bg-white"
+                >
+                  <option>Banassre</option>
+                  <option>Hazratganj</option>
+                  <option>Gomti Nagar</option>
+                </select>
+              </div>
             </div>
 
             <button
@@ -295,14 +324,15 @@ const DesktopHome = () => {
                 setCity("Lucknow");
                 setArea("Gomti Nagar");
               }}
-              className="w-full mt-6 border h-12 rounded-lg"
+              className="w-full mt-4 h-11 border border-gray-200 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
             >
-              Use Current Location
+              <FaLocationArrow size={13} className="text-green-500" />
+              Use my current location
             </button>
 
             <button
               onClick={handleLocation}
-              className="w-full mt-4 bg-green-500 text-white h-12 rounded-lg"
+              className="w-full mt-3 h-11 bg-green-500 hover:bg-green-600 text-white font-bold text-sm rounded-xl transition"
             >
               Continue
             </button>
@@ -312,7 +342,6 @@ const DesktopHome = () => {
     </div>
   );
 };
-
 function Feature({ title, text }: { title: string; text: string }) {
   return (
     <div className="flex gap-4">

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import StickyFooter from "../components/StickyFooter";
+import HomeNav from "../components/HomeNav";
 
 type MenuItem = {
   label: string;
@@ -33,6 +34,7 @@ const menuItems: MenuItem[] = [
 const Account = () => {
   return (
     <main className="min-h-screen w-full bg-white font-sans text-[#181725]">
+      <HomeNav/>
       <section className="mx-auto min-h-screen w-full  bg-white pb-[120px]">
         <header className="px-4 pt-4 text-center">
           <h1 className="text-[18px] font-semibold">Account</h1>
