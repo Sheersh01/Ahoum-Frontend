@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import {
   FaMapMarkerAlt,
@@ -7,36 +7,58 @@ import {
   FaEyeSlash,
   FaTimes,
   FaGoogle,
+  FaCrosshairs,
 } from "react-icons/fa";
 
 const DesktopHome = () => {
   const navigate = useNavigate();
 
   const [step, setStep] = useState<"auth" | "otp" | "location">("auth");
-
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [showPassword, setShowPassword] = useState(false);
-
   const [otp, setOtp] = useState(["", "", "", ""]);
-
   const [city, setCity] = useState("Dhaka");
   const [area, setArea] = useState("Banassre");
+  const [timer, setTimer] = useState(30);
+
+  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    if (step !== "otp") return;
+    setTimer(30);
+    const interval = setInterval(() => {
+      setTimer((t) => {
+        if (t <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [step]);
+
+  const timerStr = timer > 0 ? `${timer}s` : "Resend";
+
+  const handleOtpInput = (index: number, value: string) => {
+    if (!/^\d?$/.test(value)) return;
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+    if (value && index < 3) otpRefs.current[index + 1]?.focus();
+  };
 
   const handleAuth = () => {
     if (!email.trim()) {
       alert("Enter email or phone");
       return;
     }
-
     if (!password.trim()) {
       alert("Enter password");
       return;
     }
-
     setStep("otp");
   };
 
@@ -45,7 +67,6 @@ const DesktopHome = () => {
       alert("Enter OTP");
       return;
     }
-
     setStep("location");
   };
 
@@ -54,8 +75,7 @@ const DesktopHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAF7] p-6">
-      {/* AUTH SCREEN */}
+    <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto bg-white rounded-3xl overflow-hidden shadow-lg">
         <div className="grid lg:grid-cols-2 min-h-[850px]">
           {/* LEFT */}
@@ -63,10 +83,8 @@ const DesktopHome = () => {
             <div className="absolute top-10 left-10">
               <div className="flex items-center gap-3">
                 <div className="text-4xl">🥕</div>
-
                 <div>
                   <h1 className="font-bold text-3xl text-green-600">nectar</h1>
-
                   <p className="text-xs tracking-widest text-gray-500">
                     GROCERIES IN AN HOUR
                   </p>
@@ -79,40 +97,29 @@ const DesktopHome = () => {
                 Welcome to
                 <span className="block text-green-600">Nectar</span>
               </h1>
-
               <p className="mt-6 text-gray-500 text-lg">
                 Get groceries delivered to your doorstep in as fast as one hour.
               </p>
-
               <div className="space-y-6 mt-12">
                 <Feature
                   title="Fast Delivery"
                   text="Get your groceries delivered quickly."
                 />
-
                 <Feature
                   title="Fresh Products"
                   text="Handpicked quality items every day."
                 />
-
                 <Feature
                   title="Best Prices"
                   text="Affordable prices on every order."
                 />
               </div>
             </div>
-
-            <img
-              src="/delivery-man.png"
-              alt="delivery"
-              className="absolute right-0 bottom-0 h-[80%] object-contain"
-            />
           </div>
 
-          {/* ── RIGHT ── */}
+          {/* RIGHT */}
           <div className="bg-[#F8FAF6] flex items-center justify-center p-10">
             <div className="w-full max-w-[380px] bg-white rounded-2xl border border-gray-100 shadow-sm">
-              {/* Tabs */}
               <div className="grid grid-cols-2 border-b border-gray-100">
                 {(["login", "signup"] as const).map((t) => (
                   <button
@@ -227,7 +234,7 @@ const DesktopHome = () => {
         </div>
       </div>
 
-      {/* ── OTP MODAL ── */}
+      {/* OTP MODAL */}
       {step === "otp" && (
         <Modal onClose={() => setStep("auth")}>
           <div className="text-center">
@@ -272,7 +279,7 @@ const DesktopHome = () => {
         </Modal>
       )}
 
-      {/* ── LOCATION MODAL ── */}
+      {/* LOCATION MODAL */}
       {step === "location" && (
         <Modal onClose={() => setStep("otp")}>
           <div>
@@ -326,7 +333,7 @@ const DesktopHome = () => {
               }}
               className="w-full mt-4 h-11 border border-gray-200 rounded-xl flex items-center justify-center gap-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
             >
-              <FaLocationArrow size={13} className="text-green-500" />
+              <FaCrosshairs size={13} className="text-green-500" />
               Use my current location
             </button>
 
@@ -342,16 +349,15 @@ const DesktopHome = () => {
     </div>
   );
 };
+
 function Feature({ title, text }: { title: string; text: string }) {
   return (
     <div className="flex gap-4">
       <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
         ✓
       </div>
-
       <div>
         <h3 className="font-semibold">{title}</h3>
-
         <p className="text-sm text-gray-500">{text}</p>
       </div>
     </div>
@@ -371,7 +377,6 @@ function Modal({
         <button onClick={onClose} className="absolute top-4 right-4">
           <FaTimes size={18} />
         </button>
-
         {children}
       </div>
     </div>
